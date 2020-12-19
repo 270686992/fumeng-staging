@@ -1,0 +1,32 @@
+# 文件上传配置
+staging:
+  file:
+    # 七牛云配置
+    qiniuyun:
+      access-key:
+      secret-key:
+      bucket:
+      upload-token-time-limit: 3600 # 上传 token 有效期时间, 单位: 秒
+    # 文件服务域名
+    domain: http://localhost:8082/ # 本地时使用: http://localhost:8082/, 使用七牛云时使用对象存储的域名
+    # 排除文件类型(注意: 排除文件类型和包括文件类型目前实现推荐只使用其中一个, 同时使用会以 include 为准)
+    exclude:
+    # 包括文件类型(注意: 排除文件类型和包括文件类型目前实现推荐只使用其中一个, 同时使用会以 include 为准)
+    include:
+      - .jpg
+      - .png
+      - .jpeg
+      - .gif
+    # 文件最大数量
+    nums: 10
+    # 本地服务器文件路径
+    serve-path: assets/**
+    # 单个文件最大体积
+    single-limit: 10MB
+    # 本地文件保存位置
+    store-dir: assets/
+spring:
+  servlet:
+    multipart:
+      # 总体文件最大体积（只能从 max-file-size 设置总体文件的大小）
+      max-file-size: 100MB

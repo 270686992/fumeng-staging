@@ -1,0 +1,20 @@
+# 生产环境配置
+
+server:
+  # 服务端口
+  port: 8082
+
+spring:
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver # MySQL 驱动
+    url: jdbc:mysql://localhost:3306/staging?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root   # mysql 用户名
+    password: 123456 # mysql 密码
+
+# 项目自定义配置项
+staging:
+  cors-allowed-origin: http://localhost:8083 # 允许的跨域域名
+  security: # 安全性配置
+    jwt-key: fushengruomengstaging # 用于生成 JWT 令牌的 key
+    token-expire-time: 7200        # 令牌过期时间

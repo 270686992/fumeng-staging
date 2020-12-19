@@ -1,0 +1,50 @@
+# 主配置文件
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1
+
+spring:
+  profiles:
+    active: dev # prod 使用环境: dev: 开发环境, prod: 生产环境
+  jpa:
+    hibernate:
+      ddl-auto: none # 关闭 JPA 模型生成表的机制
+  jackson:
+    property-naming-strategy: SNAKE_CASE  # 配置序列化的 key 为下划线拼接的形式, 如: xxx_xxx
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true     # 配置返回的时间为时间戳形式(毫秒数)
+    time-zone: GMT+8
+  # 文件编码 UTF8
+  mandatory-file-encoding: UTF-8
+  mvc:
+    # 404 交给异常处理器处理
+    throw-exception-if-no-handler-found: true
+  resources:
+    # 关闭静态资源的映射
+    add-mappings: false
+  # 配置数据源信息
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource    # 数据源类型：HikariCP
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生 SQLException， 默认: 30 秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认: 10 分钟
+      pool-name: DateSourceHikariCP   # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认: 30 分钟 1800000 ms
+      connection-test-query: SELECT 1
+
+# swagger 配置
+swagger:
+  title: xxx 接口 API                          # API 页面标题
+  description: xxx 的 API 接口文档              # API 页面描述
+  version: 0.0.1                               # API 版本号
+  terms-of-service-url: https://www.xxx.com/   # API 服务条款地址
+  base-package: cn.xilikeli.staging.controller # API 接口包路径
+  # 作者(联系人)信息
+  name: 联系人名称                  # 名称
+  url: https://www.xxx.com/       # 个人站点地址
+  email: xxx@xxx.com              # 联系邮箱
