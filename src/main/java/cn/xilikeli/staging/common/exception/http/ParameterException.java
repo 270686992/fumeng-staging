@@ -1,10 +1,12 @@
 package cn.xilikeli.staging.common.exception.http;
 
+import cn.xilikeli.staging.common.enumeration.CodeEnum;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * <p>
- * 请求参数错误异常
+ * 参数错误异常
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -12,16 +14,37 @@ import org.springframework.http.HttpStatus;
  * @date 2020/9/22 - 01:40
  * @since JDK1.8
  */
+@Getter
 public class ParameterException extends HttpException {
+
     private static final long serialVersionUID = 2078393748938417226L;
 
     /**
-     * 构造函数
-     *
-     * @param code 消息码
+     * 消息码
      */
-    public ParameterException(Integer code) {
-        this.code = code;
-        this.httpStatusCode = HttpStatus.BAD_REQUEST.value();
+    protected Integer code = CodeEnum.PARAMETER_ERROR.getCode();
+
+    /**
+     * HTTP 状态码
+     */
+    protected Integer httpStatusCode = HttpStatus.BAD_REQUEST.value();
+
+    public ParameterException() {
+        super(CodeEnum.PARAMETER_ERROR.getCode(), CodeEnum.PARAMETER_ERROR.getDescription());
     }
+
+    public ParameterException(String message) {
+        super(message);
+    }
+
+    public ParameterException(Integer code) {
+        super(code, CodeEnum.PARAMETER_ERROR.getDescription());
+        this.code = code;
+    }
+
+    public ParameterException(Integer code, String message) {
+        super(code, message);
+        this.code = code;
+    }
+
 }

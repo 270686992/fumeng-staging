@@ -23,6 +23,7 @@ import lombok.Data;
 @AllArgsConstructor
 @ApiModel(value = "统一 API 响应结果", description = "统一 API 响应结果")
 public class UnifyResponseVO<T> {
+
     /**
      * 响应消息码
      */
@@ -136,4 +137,5 @@ public class UnifyResponseVO<T> {
         this.data = data;
         this.request = RequestUtil.getSimpleRequest();
     }
+
 }
