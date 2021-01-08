@@ -64,12 +64,12 @@ public enum CodeEnum {
     /**
      * 认证失败消息码
      */
-    UN_AUTHORIZATION(10005, "Authorization Failed", "认证失败", false),
+    UN_AUTHENTICATION(10005, "Authentication Failed", "认证失败", false),
 
     /**
      * 授权失败消息码
      */
-    UN_AUTHENTICATION(10006, "Authentication Failed", "授权失败", false),
+    UN_AUTHORIZATION(10006, "Authorization Failed", "授权失败", false),
 
     /**
      * 资源不存在消息码
@@ -104,7 +104,7 @@ public enum CodeEnum {
     /**
      * 刷新令牌获取失败消息码
      */
-    REFRESH_FAILED(10013, "Get Refresh Token Failed", "刷新令牌获取失败", false),
+    REFRESH_TOKEN_FAILED(10013, "Get Refresh Token Failed", "刷新令牌获取失败", false),
 
     /**
      * 文件体积过大消息码

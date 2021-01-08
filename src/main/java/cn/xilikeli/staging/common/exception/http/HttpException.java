@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 /**
  * <p>
  * HTTP 自定义异常基类
- * 其子类用于处理各种情况的请求发生的异常
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -17,35 +16,71 @@ import org.springframework.http.HttpStatus;
  */
 @Getter
 public class HttpException extends RuntimeException {
+
     private static final long serialVersionUID = 9135555571049693967L;
 
     /**
      * 消息码
      */
-    protected Integer code;
+    protected Integer code = CodeEnum.INTERNAL_SERVER_ERROR.getCode();
 
     /**
      * HTTP 状态码
      */
-    protected Integer httpStatusCode;
+    protected Integer httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
 
-    /**
-     * 默认构造函数
-     */
     public HttpException() {
         super(CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
-        this.code = CodeEnum.INTERNAL_SERVER_ERROR.getCode();
-        this.httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    }
+
+    public HttpException(String message) {
+        super(message);
+    }
+
+    public HttpException(Integer code) {
+        super(CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
+        this.code = code;
+    }
+
+    public HttpException(Integer code, Integer httpStatusCode) {
+        super(CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
+        this.code = code;
+        this.httpStatusCode = httpStatusCode;
+    }
+
+    public HttpException(Integer code, String message) {
+        super(message);
+        this.code = code;
+    }
+
+    public HttpException(Integer code, String message, Integer httpStatusCode) {
+        super(message);
+        this.code = code;
+        this.httpStatusCode = httpStatusCode;
+    }
+
+    public HttpException(Throwable cause, Integer code) {
+        super(cause);
+        this.code = code;
+    }
+
+    public HttpException(Throwable cause, Integer code, Integer httpStatusCode) {
+        super(cause);
+        this.code = code;
+        this.httpStatusCode = httpStatusCode;
+    }
+
+    public HttpException(String message, Throwable cause) {
+        super(message, cause);
     }
 
     /**
-     * 构造函数
+     * for better performance
      *
-     * @param message 自定义异常信息
+     * @return Throwable
      */
-    public HttpException(String message) {
-        super(message);
-        this.code = CodeEnum.INTERNAL_SERVER_ERROR.getCode();
-        this.httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    public Throwable doFillInStackTrace() {
+        return super.fillInStackTrace();
     }
+
 }

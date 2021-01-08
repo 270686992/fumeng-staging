@@ -45,8 +45,10 @@ import java.util.Set;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionAdvice {
+
     /**
      * 总体文件最大体积
+     * 该配置位于 src/main/java/cn/xilikeli/staging/extension/file/config.yml
      */
     @Value("${spring.servlet.multipart.max-file-size:20M}")
     private String maxFileSize;
@@ -338,4 +340,5 @@ public class GlobalExceptionAdvice {
 
         return errorMsg.toString();
     }
+
 }

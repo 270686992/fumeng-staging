@@ -1,11 +1,12 @@
 package cn.xilikeli.staging.common.exception.http;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * <p>
- * 文件类型不支持异常
+ * 文件扩展名异常
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -13,27 +14,37 @@ import org.springframework.http.HttpStatus;
  * @date 2020/9/28 - 10:45
  * @since JDK1.8
  */
+@Getter
 public class FileExtensionException extends HttpException {
+
     private static final long serialVersionUID = 6924801101407378789L;
 
     /**
-     * 构造函数
-     *
-     * @param code 消息码
+     * 消息码
      */
-    public FileExtensionException(Integer code) {
-        this.code = code;
-        this.httpStatusCode = HttpStatus.NOT_ACCEPTABLE.value();
-    }
+    protected Integer code = CodeEnum.FILE_EXTENSION.getCode();
 
     /**
-     * 构造函数
-     *
-     * @param message 自定义异常信息
+     * HTTP 状态码
      */
+    protected Integer httpStatusCode = HttpStatus.NOT_ACCEPTABLE.value();
+
+    public FileExtensionException() {
+        super(CodeEnum.FILE_EXTENSION.getCode(), CodeEnum.FILE_EXTENSION.getDescription());
+    }
+
     public FileExtensionException(String message) {
         super(message);
-        this.code = CodeEnum.FILE_EXTENSION.getCode();
-        this.httpStatusCode = HttpStatus.NOT_ACCEPTABLE.value();
     }
+
+    public FileExtensionException(Integer code) {
+        super(code, CodeEnum.FILE_EXTENSION.getDescription());
+        this.code = code;
+    }
+
+    public FileExtensionException(Integer code, String message) {
+        super(code, message);
+        this.code = code;
+    }
+
 }
