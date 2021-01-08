@@ -22,6 +22,7 @@ import java.util.Optional;
  * @since JDK1.8
  */
 public class JpaPageUtil {
+
     /**
      * 根据 pageable, 将一个 List 转换为一个 Page
      * pageSize 每页数量以 pageable 中为准
@@ -60,4 +61,5 @@ public class JpaPageUtil {
     private static <T> PageImpl<T> getEmptySubList(List<T> list, Pageable pageable) {
         return new PageImpl<>(new ArrayList(), pageable, list.size());
     }
+
 }

@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
  * @since JDK1.8
  */
 public class DeletedResponseVO<T> extends UnifyResponseVO<T> {
+
     public DeletedResponseVO() {
         super(CodeEnum.DELETED.getCode(), CodeEnum.DELETED.getZhDescription(), CodeEnum.DELETED.getSuccess());
         ResponseUtil.setCurrentResponseHttpStatus(HttpStatus.CREATED.value());
@@ -54,4 +55,5 @@ public class DeletedResponseVO<T> extends UnifyResponseVO<T> {
     public String toString() {
         return super.toString();
     }
+
 }

@@ -16,6 +16,7 @@ import java.util.List;
  * @since JDK1.8
  */
 public interface Uploader {
+
     /**
      * 上传文件
      *
@@ -32,4 +33,5 @@ public interface Uploader {
      * @return 文件数据
      */
     List<FileInfo> upload(MultiValueMap<String, MultipartFile> fileMap, PreHandler preHandler);
+
 }

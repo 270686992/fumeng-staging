@@ -37,6 +37,7 @@ import java.util.List;
 @AllArgsConstructor
 @Api(value = "图书 API 接口", tags = {"图书业务的相关接口"})
 public class BookController {
+
     private final BookService bookService;
 
     /**
@@ -111,4 +112,5 @@ public class BookController {
         PagingDozerVO<Book, BookSampleVO> bookPagingVO = new PagingDozerVO<>(bookPage, BookSampleVO.class);
         return ResponseUtil.generateUnifyResponseVO(bookPagingVO);
     }
+
 }

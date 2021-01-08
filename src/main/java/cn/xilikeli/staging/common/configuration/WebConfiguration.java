@@ -21,6 +21,7 @@ import java.nio.file.Path;
  */
 @Configuration(proxyBeanMethods = false)
 public class WebConfiguration implements WebMvcConfigurer {
+
     /**
      * 本地文件保存位置
      */
@@ -61,8 +62,10 @@ public class WebConfiguration implements WebMvcConfigurer {
         if (FileUtil.isAbsolutePath(storeDir)) {
             return storeDir;
         }
+
         String cmd = System.getProperty("user.dir");
         Path path = FileSystems.getDefault().getPath(cmd, storeDir);
         return path.toAbsolutePath().toString();
     }
+
 }

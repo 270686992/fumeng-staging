@@ -21,6 +21,7 @@ import org.springframework.web.filter.CorsFilter;
  */
 @Configuration(proxyBeanMethods = false)
 public class CommonConfiguration {
+
     /**
      * 允许的跨域域名
      */
@@ -67,4 +68,5 @@ public class CommonConfiguration {
         // 返回跨域配置
         return new CorsFilter(corsConfigSource);
     }
+
 }

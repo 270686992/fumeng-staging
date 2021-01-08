@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ResultAspect {
+
     @AfterReturning(returning = "result", pointcut = "execution(public * cn.xilikeli.staging.controller..*.*(..))")
     public void doAfterReturning(UnifyResponseVO result) {
         Integer code = result.getCode();
@@ -32,4 +33,5 @@ public class ResultAspect {
             result.setMessage(message);
         }
     }
+
 }

@@ -23,6 +23,7 @@ import java.util.*;
  */
 @Component
 public class JwtTokenUtil {
+
     /**
      * 用于生成 JWT 令牌的 key
      */
@@ -156,4 +157,5 @@ public class JwtTokenUtil {
         map.put("expiredTime", calendar.getTime());
         return map;
     }
+
 }

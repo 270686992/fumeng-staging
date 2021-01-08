@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
  * @since JDK1.8
  */
 public class CreatedResponseVO<T> extends UnifyResponseVO<T> {
+
     public CreatedResponseVO() {
         super(CodeEnum.CREATED.getCode(), CodeEnum.CREATED.getZhDescription(), CodeEnum.CREATED.getSuccess());
         ResponseUtil.setCurrentResponseHttpStatus(HttpStatus.CREATED.value());
@@ -54,4 +55,5 @@ public class CreatedResponseVO<T> extends UnifyResponseVO<T> {
     public String toString() {
         return super.toString();
     }
+
 }

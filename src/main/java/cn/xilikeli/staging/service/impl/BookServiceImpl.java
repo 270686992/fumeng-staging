@@ -27,6 +27,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
+
     private final BookRepository bookRepository;
 
     @Override
@@ -45,4 +46,5 @@ public class BookServiceImpl implements BookService {
         Pageable pageable = PageRequest.of(page, count);
         return this.bookRepository.findAll(pageable);
     }
+
 }

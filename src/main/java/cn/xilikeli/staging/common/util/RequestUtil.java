@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since JDK1.8
  */
 public class RequestUtil {
+
     /**
      * 获得当前请求
      *
@@ -74,4 +75,5 @@ public class RequestUtil {
 
         return request.getMethod() + " " + request.getServletPath();
     }
+
 }

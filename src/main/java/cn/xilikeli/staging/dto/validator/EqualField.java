@@ -24,6 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = EqualFieldValidator.class)
 public @interface EqualField {
+
     /**
      * 源属性
      */
@@ -39,4 +40,5 @@ public @interface EqualField {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }

@@ -11,13 +11,15 @@ package cn.xilikeli.staging.module.file;
  * @since JDK1.8
  */
 public class FileConstant {
+
     /**
      * 本地文件
      */
     public static final String LOCAL = "LOCAL";
 
     /**
-     * 远程文件, 例如 OSS
+     * 远程文件
      */
     public static final String REMOTE = "REMOTE";
+
 }

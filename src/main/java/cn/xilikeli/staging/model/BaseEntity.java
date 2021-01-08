@@ -30,6 +30,7 @@ import java.util.Date;
 @MappedSuperclass
 @ApiModel(value = "实体的抽象基类", description = "实体的抽象基类")
 public abstract class BaseEntity implements Serializable {
+
     private static final long serialVersionUID = -49953182948096835L;
 
     /**
@@ -54,4 +55,5 @@ public abstract class BaseEntity implements Serializable {
     @JsonIgnore
     @ApiModelProperty(value = "删除时间")
     private Date deleteTime;
+
 }
