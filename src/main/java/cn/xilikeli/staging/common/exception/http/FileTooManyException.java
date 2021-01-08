@@ -1,6 +1,7 @@
 package cn.xilikeli.staging.common.exception.http;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -13,27 +14,37 @@ import org.springframework.http.HttpStatus;
  * @date 2020/9/28 - 10:39
  * @since JDK1.8
  */
+@Getter
 public class FileTooManyException extends HttpException {
+
     private static final long serialVersionUID = 1716392625715710138L;
 
     /**
-     * 构造函数
-     *
-     * @param code 消息码
+     * 消息码
      */
-    public FileTooManyException(Integer code) {
-        this.code = code;
-        this.httpStatusCode = HttpStatus.PAYLOAD_TOO_LARGE.value();
-    }
+    protected Integer code = CodeEnum.FILE_TOO_MANY.getCode();
 
     /**
-     * 构造函数
-     *
-     * @param message 自定义异常信息
+     * HTTP 状态码
      */
+    protected Integer httpStatusCode = HttpStatus.PAYLOAD_TOO_LARGE.value();
+
+    public FileTooManyException() {
+        super(CodeEnum.FILE_TOO_MANY.getCode(), CodeEnum.FILE_TOO_MANY.getDescription());
+    }
+
     public FileTooManyException(String message) {
         super(message);
-        this.code = CodeEnum.FILE_TOO_MANY.getCode();
-        this.httpStatusCode = HttpStatus.PAYLOAD_TOO_LARGE.value();
     }
+
+    public FileTooManyException(Integer code) {
+        super(code, CodeEnum.FILE_TOO_MANY.getDescription());
+        this.code = code;
+    }
+
+    public FileTooManyException(Integer code, String message) {
+        super(code, message);
+        this.code = code;
+    }
+
 }

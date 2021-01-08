@@ -1,10 +1,12 @@
 package cn.xilikeli.staging.common.exception.http;
 
+import cn.xilikeli.staging.common.enumeration.CodeEnum;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * <p>
- * 找不到资源异常
+ * 资源不存在异常
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -12,16 +14,37 @@ import org.springframework.http.HttpStatus;
  * @date 2020/9/22 - 01:39
  * @since JDK1.8
  */
+@Getter
 public class NotFoundException extends HttpException {
+
     private static final long serialVersionUID = 2432756194955583275L;
 
     /**
-     * 构造函数
-     *
-     * @param code 消息码
+     * 消息码
      */
-    public NotFoundException(Integer code) {
-        this.code = code;
-        this.httpStatusCode = HttpStatus.NOT_FOUND.value();
+    protected Integer code = CodeEnum.NOT_FOUND.getCode();
+
+    /**
+     * HTTP 状态码
+     */
+    protected Integer httpStatusCode = HttpStatus.NOT_FOUND.value();
+
+    public NotFoundException() {
+        super(CodeEnum.NOT_FOUND.getCode(), CodeEnum.NOT_FOUND.getDescription());
     }
+
+    public NotFoundException(String message) {
+        super(message);
+    }
+
+    public NotFoundException(Integer code) {
+        super(code, CodeEnum.NOT_FOUND.getDescription());
+        this.code = code;
+    }
+
+    public NotFoundException(Integer code, String message) {
+        super(code, message);
+        this.code = code;
+    }
+
 }
