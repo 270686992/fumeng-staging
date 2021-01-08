@@ -22,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @ApiModel(value = "分页数据统一 VO", description = "封装统一分页数据结果的实体")
 public class PagingVO<T> {
+
     /**
      * 数据总数量
      */
@@ -74,4 +75,5 @@ public class PagingVO<T> {
         this.page = pageT.getNumber();
         this.totalPage = pageT.getTotalPages();
     }
+
 }

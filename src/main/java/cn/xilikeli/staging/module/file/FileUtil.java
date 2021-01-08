@@ -19,6 +19,7 @@ import java.nio.file.Path;
  * @since JDK1.8
  */
 public class FileUtil {
+
     /**
      * 获取当前系统的文件系统实现
      *
@@ -129,4 +130,5 @@ public class FileUtil {
         DataSize singleLimitData = DataSize.parse(size);
         return singleLimitData.toBytes();
     }
+
 }

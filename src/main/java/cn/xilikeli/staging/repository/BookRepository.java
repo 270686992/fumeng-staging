@@ -14,4 +14,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since JDK1.8
  */
 public interface BookRepository extends JpaRepository<Book, Long> {
+
 }

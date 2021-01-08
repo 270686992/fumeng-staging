@@ -22,6 +22,7 @@ import java.util.Map;
 @ConfigurationProperties
 @PropertySource(value = "classpath:code-message.properties", encoding = "UTF-8")
 public class CodeMessageConfiguration {
+
     /**
      * 用于存储配置文件中的 code 码和提示信息
      */
@@ -38,4 +39,5 @@ public class CodeMessageConfiguration {
     public void setCodeMessage(Map<Integer, String> codeMessage) {
         CodeMessageConfiguration.codeMessageMap = codeMessage;
     }
+
 }

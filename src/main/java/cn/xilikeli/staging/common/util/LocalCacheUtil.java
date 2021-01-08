@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class LocalCacheUtil {
+
     /**
      * 本地缓存统一前缀
      */
@@ -76,4 +77,5 @@ public class LocalCacheUtil {
 
         return null;
     }
+
 }

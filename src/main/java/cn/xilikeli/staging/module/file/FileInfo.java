@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * <p>
- * 待处理文件信息实体
+ * 待处理文件信息
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileInfo {
+
     /**
      * 真实 url, 用于访问文件
      */
@@ -63,4 +64,5 @@ public class FileInfo {
      * md5 值, 防止上传重复文件
      */
     private String md5;
+
 }

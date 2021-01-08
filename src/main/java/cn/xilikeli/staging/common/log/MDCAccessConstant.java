@@ -12,6 +12,7 @@ package cn.xilikeli.staging.common.log;
  * @since JDK1.8
  */
 public class MDCAccessConstant {
+
     public static final String REQUEST_METHOD_MDC_KEY = "req.method";
 
     public static final String RESPONSE_STATUS_MDC_KEY = "res.status";
@@ -37,4 +38,5 @@ public class MDCAccessConstant {
     public static final String REQUEST_BODY_BYTES_SENT_MDC_KEY = "req.bodyBytesSent";
 
     public static final String REQUEST_REMOTE_PORT_MDC_KEY = "req.remotePort";
+
 }

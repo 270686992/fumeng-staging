@@ -97,4 +97,5 @@ public class MDCAccessServletFilter implements Filter {
         MDC.remove(MDCAccessConstant.REQUEST_BODY_BYTES_SENT_MDC_KEY);
         MDC.remove(MDCAccessConstant.REQUEST_REMOTE_PORT_MDC_KEY);
     }
+
 }

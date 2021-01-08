@@ -18,6 +18,7 @@ import org.springframework.core.annotation.Order;
  */
 @Configuration
 public class UploaderConfiguration {
+
     /**
      * 切换到七牛云文件上传实现类
      * 使用本地上传时将该方法注释即可, 同时需要注意 config.yml 配置文件中配置的文件服务域名需要为本地的
@@ -42,4 +43,5 @@ public class UploaderConfiguration {
     public Uploader uploader(){
         return new LocalUploader();
     }
+
 }

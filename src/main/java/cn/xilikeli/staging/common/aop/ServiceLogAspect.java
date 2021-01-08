@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class ServiceLogAspect {
+
     @Around("execution(* cn.xilikeli.staging.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
         Class<?> targetClz = joinPoint.getTarget().getClass();
@@ -38,4 +39,5 @@ public class ServiceLogAspect {
 
         return result;
     }
+
 }

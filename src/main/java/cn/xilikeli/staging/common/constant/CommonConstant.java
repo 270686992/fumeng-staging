@@ -11,8 +11,10 @@ package cn.xilikeli.staging.common.constant;
  * @since JDK1.8
  */
 public class CommonConstant {
+
     /**
      * 字符串形式的 null 值
      */
     public static final String NULL = "null";
+
 }

@@ -19,6 +19,7 @@ import java.util.List;
  */
 @SuppressWarnings("all")
 public class PagingDozerVO<T, K> extends PagingVO {
+
     /**
      * 构造函数
      * 将查询出来的源数据分页对象构造成目标类型的分页数据视图对象
@@ -41,4 +42,5 @@ public class PagingDozerVO<T, K> extends PagingVO {
 
         this.setItems(targetList);
     }
+
 }

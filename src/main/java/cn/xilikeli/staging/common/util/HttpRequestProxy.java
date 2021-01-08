@@ -21,6 +21,7 @@ import java.net.UnknownHostException;
 @Component
 @Slf4j
 public class HttpRequestProxy {
+
     /**
      * 用户的请求
      */
@@ -95,4 +96,5 @@ public class HttpRequestProxy {
 
         return ipAddress;
     }
+
 }

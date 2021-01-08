@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @SuppressWarnings("all")
 public class ResponseUtil {
+
     /**
      * 获得当前响应
      *
@@ -139,4 +140,5 @@ public class ResponseUtil {
                 .request(RequestUtil.getSimpleRequest())
                 .build();
     }
+
 }

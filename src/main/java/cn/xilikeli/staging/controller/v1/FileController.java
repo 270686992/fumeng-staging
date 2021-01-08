@@ -33,6 +33,7 @@ import java.util.List;
 @AllArgsConstructor
 @Api(value = "文件上传 API 接口", tags = {"文件上传的相关接口"})
 public class FileController {
+
     private final FileService fileService;
 
     /**
@@ -48,4 +49,5 @@ public class FileController {
         List<FileBO> uploadFileList = this.fileService.upload(fileMap);
         return ResponseUtil.generateUnifyResponseVO(uploadFileList);
     }
+
 }
