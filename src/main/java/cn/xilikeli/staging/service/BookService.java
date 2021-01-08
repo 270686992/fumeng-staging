@@ -16,6 +16,7 @@ import java.util.List;
  * @since JDK1.8
  */
 public interface BookService {
+
     /**
      * 根据图书 ID 获取相应图书
      *
@@ -39,4 +40,5 @@ public interface BookService {
      * @return 返回封装着获取的图书列表(没有图书则会为空列表)的分页对象
      */
     Page<Book> getBookListByPage(Integer page, Integer count);
+
 }

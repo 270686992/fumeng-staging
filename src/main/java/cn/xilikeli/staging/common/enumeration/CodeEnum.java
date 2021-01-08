@@ -11,6 +11,7 @@ package cn.xilikeli.staging.common.enumeration;
  * @since JDK1.8
  */
 public enum CodeEnum {
+
     /**
      * 通用成功消息码
      */
@@ -193,4 +194,5 @@ public enum CodeEnum {
     public Boolean getSuccess() {
         return success;
     }
+
 }

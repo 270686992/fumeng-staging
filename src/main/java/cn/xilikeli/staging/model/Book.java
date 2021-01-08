@@ -11,10 +11,10 @@ import javax.persistence.Id;
 
 /**
  * <p>
- * 图书 Model
+ * 图书实体
  * </p>
  *
- * @author 踏雪彡寻梅@浮生若梦
+ * @author 踏雪彡寻梅
  * @version 1.0
  * @date 2020/9/24 - 01:20
  * @since JDK1.8
@@ -23,8 +23,9 @@ import javax.persistence.Id;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "delete_time is null")
-@ApiModel(value = "图书实体", description = "封装图书信息的实体")
+@ApiModel(value = "图书实体", description = "图书实体")
 public class Book extends BaseEntity {
+
     private static final long serialVersionUID = -187723241117592869L;
 
     /**
@@ -57,4 +58,5 @@ public class Book extends BaseEntity {
      */
     @ApiModelProperty(value = "图书封面图 url")
     private String image;
+
 }

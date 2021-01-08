@@ -15,6 +15,7 @@ import com.amdelamar.jhash.exception.InvalidHashException;
  * @since JDK1.8
  */
 public class EncryptUtil {
+
     /**
      * 设置密文密码
      *
@@ -41,4 +42,5 @@ public class EncryptUtil {
             return false;
         }
     }
+
 }

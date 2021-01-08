@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since JDK1.8
  */
 public interface FileRepository extends JpaRepository<File, Long> {
+
     /**
      * 通过文件的 md5 值查询相应的文件
      *
@@ -29,4 +30,5 @@ public interface FileRepository extends JpaRepository<File, Long> {
      * @return 返回 md5 值相应的文件数量, 查询不到则会返回 0
      */
     int countByMd5(String md5);
+
 }

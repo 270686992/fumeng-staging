@@ -20,6 +20,7 @@ import java.lang.reflect.Field;
  */
 @Slf4j
 public class EqualFieldValidator implements ConstraintValidator<EqualField, Object> {
+
     /**
      * 源属性
      */
@@ -70,4 +71,5 @@ public class EqualFieldValidator implements ConstraintValidator<EqualField, Obje
             return false;
         }
     }
+
 }

@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @ApiModel(value = "图书示例 VO", description = "图书示例 VO")
 public class BookSampleVO {
+
     /**
      * 图书 ID
      */
@@ -46,4 +47,5 @@ public class BookSampleVO {
      */
     @ApiModelProperty(value = "图书封面图 url")
     private String image;
+
 }

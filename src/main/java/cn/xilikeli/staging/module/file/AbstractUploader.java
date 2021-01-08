@@ -20,6 +20,7 @@ import java.util.UUID;
  * @since JDK1.8
  */
 public abstract class AbstractUploader implements Uploader {
+
     /**
      * 文件预处理器
      */
@@ -35,17 +36,17 @@ public abstract class AbstractUploader implements Uploader {
     /**
      * 处理一个文件
      *
-     * @param bytes       文件的字节
+     * @param bytes       文件数据, 比特流
      * @param newFilename 新文件名称
      * @return 返回处理是否成功
      */
     protected abstract boolean handleOneFile(byte[] bytes, String newFilename);
 
     /**
-     * 通过新文件名获取新文件的路径
+     * 获取文件的存储路径
      *
-     * @param newFilename 新文件名
-     * @return 返回新文件的路径
+     * @param newFilename 文件名
+     * @return 返回文件的存储路径
      */
     protected abstract String getStorePath(String newFilename);
 
@@ -271,4 +272,5 @@ public abstract class AbstractUploader implements Uploader {
         }
         return false;
     }
+
 }

@@ -13,18 +13,20 @@ import cn.xilikeli.staging.bo.PageCounterBO;
  * @since JDK1.8
  */
 public class PageUtil {
+
     /**
-     * 分页参数转换,移动端分页参数转换为 PC 端分页参数
+     * 分页参数转换, 移动端分页参数转换为 PC 端分页参数
      *
      * @param start 当前数据索引
      * @param count 每页的数据条数
      * @return 返回转换后的统一分页参数 BO
      */
-    public static PageCounterBO convertToPageParameter(Integer start, Integer count) {
+    public static PageCounterBO convertMobilePage2PcPage(Integer start, Integer count) {
         Integer page = start / count;
         return PageCounterBO.builder()
                 .page(page)
                 .count(count)
                 .build();
     }
+
 }

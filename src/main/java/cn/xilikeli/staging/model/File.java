@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * <p>
- * 文件信息 Model
+ * 文件信息实体
  * </p>
  *
  * @author 踏雪彡寻梅
@@ -26,8 +26,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "delete_time is null")
-@ApiModel(value = "文件信息实体", description = "封装文件信息的实体")
+@ApiModel(value = "文件信息实体", description = "文件信息实体")
 public class File extends BaseEntity {
+
     private static final long serialVersionUID = -7988788433514112555L;
 
     /**
@@ -69,4 +70,5 @@ public class File extends BaseEntity {
      */
     @ApiModelProperty(value = "md5 值, 防止上传重复文件")
     private String md5;
+
 }

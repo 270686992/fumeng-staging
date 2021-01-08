@@ -28,6 +28,7 @@ import java.util.Date;
  */
 @Slf4j
 public class LocalUploader extends AbstractUploader {
+
     @Autowired
     private FileProperties fileProperties;
 
@@ -85,4 +86,5 @@ public class LocalUploader extends AbstractUploader {
     protected String getFileType() {
         return FileConstant.LOCAL;
     }
+
 }

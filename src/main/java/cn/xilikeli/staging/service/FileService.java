@@ -17,6 +17,7 @@ import java.util.List;
  * @since JDK1.8
  */
 public interface FileService {
+
     /**
      * 上传文件
      *
@@ -32,4 +33,5 @@ public interface FileService {
      * @return 返回 true 表示已存在, 返回 false 表示不存在
      */
     boolean checkFileExistByMd5(String md5);
+
 }

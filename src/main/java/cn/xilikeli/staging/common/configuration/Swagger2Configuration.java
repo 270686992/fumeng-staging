@@ -39,6 +39,7 @@ import java.util.List;
 @EnableSwagger2
 @ConfigurationProperties(prefix = "swagger")
 public class Swagger2Configuration {
+
     /**
      * API 接口包路径
      */
@@ -87,15 +88,11 @@ public class Swagger2Configuration {
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                // 用于定义 API 文档汇总信息
                 .apiInfo(apiInfo())
                 .select()
-                // 指定 controller 包
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
-                // 把 controller 包下所有 controller 都选择
                 .paths(PathSelectors.any())
                 .build()
-                // 设置全局参数
                 .globalOperationParameters(globalOperation());
     }
 
@@ -109,12 +106,12 @@ public class Swagger2Configuration {
         ParameterBuilder tokenPar = new ParameterBuilder();
 
         // 配置 token 参数, 非必传
-        // Authorization 为传参的 key, token 为 Swagger 页面显示的值
         tokenPar.name("Authorization")
                 .description("token")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false)
+                .scalarExample("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjM0LCJzY29wZSI6OCwiZXhwIjoxNjc1MDU2NzcyLCJpYXQiOjE1ODg2NTY3NzJ9.FEAYgvHOOkk_x2l4od0bc5RitaXT4xaSUxaL65NT0-w(登录接口获得的令牌信息, 与最前面的 Bearer 要相隔一个空格)")
                 .build();
 
         pars.add(tokenPar.build());
@@ -136,4 +133,5 @@ public class Swagger2Configuration {
                 .termsOfServiceUrl(termsOfServiceUrl)
                 .build();
     }
+
 }

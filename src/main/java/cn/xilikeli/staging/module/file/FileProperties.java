@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
         value = "classpath:cn/xilikeli/staging/extension/file/config.yml",
         encoding = "UTF-8", factory = YmlPropertySourceFactory.class)
 public class FileProperties {
+
     private static final String[] DEFAULT_EMPTY_ARRAY = new String[0];
 
     /**
@@ -113,4 +114,5 @@ public class FileProperties {
     public void setDomain(String domain) {
         this.domain = domain;
     }
+
 }
