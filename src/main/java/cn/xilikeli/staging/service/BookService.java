@@ -33,11 +33,11 @@ public interface BookService {
     List<Book> getAllBookList();
 
     /**
-     * 根据分页查询参数 page、count 获取当前页的图书列表
+     * 获取当前页的图书列表
      *
      * @param page  当前页数
      * @param count 每页图书数
-     * @return 返回封装着获取的图书列表(没有图书则会为空列表)的分页对象
+     * @return 返回封装着获取的当前页的图书列表(没有图书则会为空列表)的分页对象
      */
     Page<Book> getBookListByPage(Integer page, Integer count);
 

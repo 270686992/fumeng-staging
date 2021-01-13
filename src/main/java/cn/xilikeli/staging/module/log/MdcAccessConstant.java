@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.common.log;
+package cn.xilikeli.staging.module.log;
 
 /**
  * <p>
@@ -11,7 +11,7 @@ package cn.xilikeli.staging.common.log;
  * @date 2020/9/24 - 01:59
  * @since JDK1.8
  */
-public class MDCAccessConstant {
+public class MdcAccessConstant {
 
     public static final String REQUEST_METHOD_MDC_KEY = "req.method";
 
