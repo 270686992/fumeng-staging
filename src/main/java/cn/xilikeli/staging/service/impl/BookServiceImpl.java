@@ -2,7 +2,7 @@ package cn.xilikeli.staging.service.impl;
 
 import cn.xilikeli.staging.common.constant.BusinessCodeConstant;
 import cn.xilikeli.staging.common.exception.http.NotFoundException;
-import cn.xilikeli.staging.model.Book;
+import cn.xilikeli.staging.model.BookDO;
 import cn.xilikeli.staging.repository.BookRepository;
 import cn.xilikeli.staging.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +35,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookById(Long bookId) {
-        Optional<Book> bookOptional = this.bookRepository.findById(bookId);
+    public BookDO getBookById(Long bookId) {
+        Optional<BookDO> bookOptional = this.bookRepository.findById(bookId);
         return bookOptional.orElseThrow(
                 () -> new NotFoundException(BusinessCodeConstant.NOT_FOUND_BOOK)
         );
     }
 
     @Override
-    public List<Book> getAllBookList() {
+    public List<BookDO> getAllBookList() {
         return this.bookRepository.findAll();
     }
 
     @Override
-    public Page<Book> getBookListByPage(Integer page, Integer count) {
+    public Page<BookDO> getBookListByPage(Integer page, Integer count) {
         Pageable pageable = PageRequest.of(page, count);
         return this.bookRepository.findAll(pageable);
     }

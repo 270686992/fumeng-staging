@@ -1,6 +1,6 @@
 package cn.xilikeli.staging.repository;
 
-import cn.xilikeli.staging.model.File;
+import cn.xilikeli.staging.model.FileDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2020/9/28 - 20:39
  * @since JDK1.8
  */
-public interface FileRepository extends JpaRepository<File, Long> {
+public interface FileRepository extends JpaRepository<FileDO, Long> {
 
     /**
      * 通过文件的 md5 值查询相应的文件
@@ -21,7 +21,7 @@ public interface FileRepository extends JpaRepository<File, Long> {
      * @param md5 文件的 md5 值
      * @return 返回 md5 值相应的文件, 查询不到则会返回 null
      */
-    File findOneByMd5(String md5);
+    FileDO findOneByMd5(String md5);
 
     /**
      * 通过文件的 md5 值查询存在该 md5 值的文件的数量

@@ -1,6 +1,6 @@
 package cn.xilikeli.staging.repository;
 
-import cn.xilikeli.staging.model.Book;
+import cn.xilikeli.staging.model.BookDO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2020/9/24 - 01:27
  * @since JDK1.8
  */
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<BookDO, Long> {
 
 }
