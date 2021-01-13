@@ -1,7 +1,7 @@
 package cn.xilikeli.staging.controller.v1;
 
 import cn.xilikeli.staging.common.util.ResponseUtil;
-import cn.xilikeli.staging.model.Book;
+import cn.xilikeli.staging.model.BookDO;
 import cn.xilikeli.staging.service.BookService;
 import cn.xilikeli.staging.vo.BookSampleVO;
 import cn.xilikeli.staging.vo.PagingDozerVO;
@@ -52,10 +52,10 @@ public class BookController {
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "获取一本图书", notes = "根据图书 ID 获取相应图书", httpMethod = "GET")
-    public UnifyResponseVO<Book> getBook(@PathVariable(name = "id")
+    public UnifyResponseVO<BookDO> getBook(@PathVariable(name = "id")
                                          @Positive(message = "{id.positive}")
                                          @ApiParam(name = "id", value = "图书 ID", required = true, example = "1") Long bookId) {
-        Book book = this.bookService.getBookById(bookId);
+        BookDO book = this.bookService.getBookById(bookId);
         return ResponseUtil.generateUnifyResponseVO(book);
     }
 
@@ -66,8 +66,8 @@ public class BookController {
      */
     @GetMapping("/list")
     @ApiOperation(value = "获取所有图书", notes = "获取所有图书, 以 List 列表方式获取", httpMethod = "GET")
-    public UnifyResponseVO<List<Book>> getAllBookList() {
-        List<Book> bookList = this.bookService.getAllBookList();
+    public UnifyResponseVO<List<BookDO>> getAllBookList() {
+        List<BookDO> bookList = this.bookService.getAllBookList();
         return ResponseUtil.generateUnifyResponseVO(bookList);
     }
 
@@ -80,15 +80,15 @@ public class BookController {
      */
     @GetMapping("/latest")
     @ApiOperation(value = "分页获取图书", notes = "获取当前页的图书列表", httpMethod = "GET")
-    public UnifyResponseVO<PagingVO<Book>> getBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
+    public UnifyResponseVO<PagingVO<BookDO>> getBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
                                                        @Min(value = 0, message = "{page.number.min}")
                                                        @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
-                                                       @RequestParam(name = "count", required = false, defaultValue = "10")
+                                                         @RequestParam(name = "count", required = false, defaultValue = "10")
                                                        @Min(value = 1, message = "{page.count.min}")
                                                        @Max(value = 30, message = "{page.count.max}")
                                                        @ApiParam(name = "count", value = "每页图书数", defaultValue = "10", example = "10") Integer count) {
-        Page<Book> bookPage = this.bookService.getBookListByPage(page, count);
-        PagingVO<Book> bookPagingVO = new PagingVO<>(bookPage);
+        Page<BookDO> bookPage = this.bookService.getBookListByPage(page, count);
+        PagingVO<BookDO> bookPagingVO = new PagingVO<>(bookPage);
         return ResponseUtil.generateUnifyResponseVO(bookPagingVO);
     }
 
@@ -101,15 +101,15 @@ public class BookController {
      */
     @GetMapping("/simple/latest")
     @ApiOperation(value = "分页获取图书简要信息", notes = "获取当前页的图书简要信息列表", httpMethod = "GET")
-    public UnifyResponseVO<PagingDozerVO<Book, BookSampleVO>> getSimpleBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
+    public UnifyResponseVO<PagingDozerVO<BookDO, BookSampleVO>> getSimpleBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
                                                                                 @Min(value = 0, message = "{page.number.min}")
                                                                                 @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
-                                                                                @RequestParam(name = "count", required = false, defaultValue = "10")
+                                                                                  @RequestParam(name = "count", required = false, defaultValue = "10")
                                                                                 @Min(value = 1, message = "{page.count.min}")
                                                                                 @Max(value = 30, message = "{page.count.max}")
                                                                                 @ApiParam(name = "count", value = "每页图书简要信息数", defaultValue = "10", example = "10") Integer count) {
-        Page<Book> bookPage = this.bookService.getBookListByPage(page, count);
-        PagingDozerVO<Book, BookSampleVO> bookPagingVO = new PagingDozerVO<>(bookPage, BookSampleVO.class);
+        Page<BookDO> bookPage = this.bookService.getBookListByPage(page, count);
+        PagingDozerVO<BookDO, BookSampleVO> bookPagingVO = new PagingDozerVO<>(bookPage, BookSampleVO.class);
         return ResponseUtil.generateUnifyResponseVO(bookPagingVO);
     }
 
