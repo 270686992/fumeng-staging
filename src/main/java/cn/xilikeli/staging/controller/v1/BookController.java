@@ -10,7 +10,7 @@ import cn.xilikeli.staging.vo.UnifyResponseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +34,15 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/v1/book")
-@AllArgsConstructor
 @Api(value = "图书 API 接口", tags = {"图书业务的相关接口"})
 public class BookController {
 
-    private final BookService bookService;
+    private BookService bookService;
+
+    @Autowired
+    public void setBookService(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     /**
      * 根据图书 ID 获取相应图书
@@ -50,7 +54,7 @@ public class BookController {
     @ApiOperation(value = "获取一本图书", notes = "根据图书 ID 获取相应图书", httpMethod = "GET")
     public UnifyResponseVO<Book> getBook(@PathVariable(name = "id")
                                          @Positive(message = "{id.positive}")
-                                         @ApiParam(name = "id", value = "图书 ID", required = true) Long bookId) {
+                                         @ApiParam(name = "id", value = "图书 ID", required = true, example = "1") Long bookId) {
         Book book = this.bookService.getBookById(bookId);
         return ResponseUtil.generateUnifyResponseVO(book);
     }
@@ -68,47 +72,43 @@ public class BookController {
     }
 
     /**
-     * 根据分页查询参数 page、count 获取当前页的图书列表
+     * 获取当前页的图书列表
      *
      * @param page  当前页数
      * @param count 每页图书数
-     * @return 返回封装着获取的图书列表的分页对象
+     * @return 返回封装着获取的当前页的图书列表的分页视图对象
      */
     @GetMapping("/latest")
-    @ApiOperation(value = "分页获取图书", notes = "根据分页查询参数 page、count 获取当前页的图书列表", httpMethod = "GET")
+    @ApiOperation(value = "分页获取图书", notes = "获取当前页的图书列表", httpMethod = "GET")
     public UnifyResponseVO<PagingVO<Book>> getBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
                                                        @Min(value = 0, message = "{page.number.min}")
-                                                       @ApiParam(name = "page", value = "当前页数", defaultValue = "0") Integer page,
+                                                       @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
                                                        @RequestParam(name = "count", required = false, defaultValue = "10")
                                                        @Min(value = 1, message = "{page.count.min}")
                                                        @Max(value = 30, message = "{page.count.max}")
-                                                       @ApiParam(name = "count", value = "每页图书数", defaultValue = "10") Integer count) {
-        // 获取分页对象
+                                                       @ApiParam(name = "count", value = "每页图书数", defaultValue = "10", example = "10") Integer count) {
         Page<Book> bookPage = this.bookService.getBookListByPage(page, count);
-        // 转换为分页 VO
         PagingVO<Book> bookPagingVO = new PagingVO<>(bookPage);
         return ResponseUtil.generateUnifyResponseVO(bookPagingVO);
     }
 
     /**
-     * 根据分页查询参数 page、count 获取当前页的图书简要信息列表
+     * 获取当前页的图书简要信息列表
      *
      * @param page  当前页数
      * @param count 每页图书简要信息数
-     * @return 返回封装着获取的图书简要信息列表的分页对象
+     * @return 返回封装着获取的当前页的图书简要信息列表的分页视图对象
      */
     @GetMapping("/simple/latest")
-    @ApiOperation(value = "分页获取图书简要信息", notes = "根据分页查询参数 page、count 获取当前页的图书简要信息列表", httpMethod = "GET")
+    @ApiOperation(value = "分页获取图书简要信息", notes = "获取当前页的图书简要信息列表", httpMethod = "GET")
     public UnifyResponseVO<PagingDozerVO<Book, BookSampleVO>> getSimpleBookList(@RequestParam(name = "page", required = false, defaultValue = "0")
                                                                                 @Min(value = 0, message = "{page.number.min}")
-                                                                                @ApiParam(name = "page", value = "当前页数", defaultValue = "0") Integer page,
+                                                                                @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
                                                                                 @RequestParam(name = "count", required = false, defaultValue = "10")
                                                                                 @Min(value = 1, message = "{page.count.min}")
                                                                                 @Max(value = 30, message = "{page.count.max}")
-                                                                                @ApiParam(name = "count", value = "每页图书简要信息数", defaultValue = "10") Integer count) {
-        // 获取分页对象
+                                                                                @ApiParam(name = "count", value = "每页图书简要信息数", defaultValue = "10", example = "10") Integer count) {
         Page<Book> bookPage = this.bookService.getBookListByPage(page, count);
-        // 转换为分页 VO
         PagingDozerVO<Book, BookSampleVO> bookPagingVO = new PagingDozerVO<>(bookPage, BookSampleVO.class);
         return ResponseUtil.generateUnifyResponseVO(bookPagingVO);
     }

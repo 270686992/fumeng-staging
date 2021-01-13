@@ -36,10 +36,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 指定 swagger 的静态资源处理
-        registry.addResourceHandler("/swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/", "/static", "/public");
-
+        // 指定 knife4j 的静态资源处理
         registry.addResourceHandler("/doc.html")
                 .addResourceLocations("classpath:/META-INF/resources/", "/static", "/public");
 
@@ -51,12 +48,15 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("file:" + getAbsDir() + "/");
     }
 
+    /**
+     * 获得服务器文件路径
+     */
     private String getDirServePath() {
         return servePath;
     }
 
     /**
-     * 获得文件夹的绝对路径
+     * 获得本地文件保存位置的路径
      */
     private String getAbsDir() {
         if (FileUtil.isAbsolutePath(storeDir)) {

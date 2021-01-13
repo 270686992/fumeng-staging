@@ -5,8 +5,10 @@ import cn.xilikeli.staging.common.util.ResponseUtil;
 import cn.xilikeli.staging.service.FileService;
 import cn.xilikeli.staging.vo.UnifyResponseVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +32,15 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/v1/file")
-@AllArgsConstructor
 @Api(value = "文件上传 API 接口", tags = {"文件上传的相关接口"})
 public class FileController {
 
-    private final FileService fileService;
+    private FileService fileService;
+
+    @Autowired
+    public void setFileService(FileService fileService) {
+        this.fileService = fileService;
+    }
 
     /**
      * 文件上传接口
@@ -44,6 +50,9 @@ public class FileController {
      */
     @PostMapping
     @ApiOperation(value = "文件上传接口", notes = "文件上传接口", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "file", value = "上传的文件", dataType = "MultipartFile", required = true)
+    })
     public UnifyResponseVO<List<FileBO>> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
         MultiValueMap<String, MultipartFile> fileMap = multipartHttpServletRequest.getMultiFileMap();
         List<FileBO> uploadFileList = this.fileService.upload(fileMap);

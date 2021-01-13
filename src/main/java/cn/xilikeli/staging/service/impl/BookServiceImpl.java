@@ -5,7 +5,7 @@ import cn.xilikeli.staging.common.exception.http.NotFoundException;
 import cn.xilikeli.staging.model.Book;
 import cn.xilikeli.staging.repository.BookRepository;
 import cn.xilikeli.staging.service.BookService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,15 +25,21 @@ import java.util.Optional;
  * @since JDK1.8
  */
 @Service
-@AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    private final BookRepository bookRepository;
+    private BookRepository bookRepository;
+
+    @Autowired
+    public void setBookRepository(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public Book getBookById(Long bookId) {
         Optional<Book> bookOptional = this.bookRepository.findById(bookId);
-        return bookOptional.orElseThrow(() -> new NotFoundException(BusinessCodeConstant.NOT_FOUND_BOOK));
+        return bookOptional.orElseThrow(
+                () -> new NotFoundException(BusinessCodeConstant.NOT_FOUND_BOOK)
+        );
     }
 
     @Override
