@@ -1,6 +1,6 @@
 package cn.xilikeli.staging.common.configuration;
 
-import cn.xilikeli.staging.common.log.MDCAccessServletFilter;
+import cn.xilikeli.staging.module.log.MdcAccessServletFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -35,9 +35,9 @@ public class CommonConfiguration {
      * @return Logback 的 MDCInsertingServletFilter
      */
     @Bean
-    public FilterRegistrationBean<MDCAccessServletFilter> mdcInsertingServletFilter() {
-        FilterRegistrationBean<MDCAccessServletFilter> filterRegistrationBean = new FilterRegistrationBean<>();
-        MDCAccessServletFilter mdcAccessServletFilter = new MDCAccessServletFilter();
+    public FilterRegistrationBean<MdcAccessServletFilter> mdcInsertingServletFilter() {
+        FilterRegistrationBean<MdcAccessServletFilter> filterRegistrationBean = new FilterRegistrationBean<>();
+        MdcAccessServletFilter mdcAccessServletFilter = new MdcAccessServletFilter();
         filterRegistrationBean.setFilter(mdcAccessServletFilter);
         filterRegistrationBean.setName("mdc-access-servlet-filter");
         return filterRegistrationBean;

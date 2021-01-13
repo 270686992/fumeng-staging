@@ -2,13 +2,14 @@ package cn.xilikeli.staging.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.xilikeli.staging.bo.FileBO;
+import cn.xilikeli.staging.common.constant.CommonConstant;
 import cn.xilikeli.staging.model.File;
 import cn.xilikeli.staging.module.file.FileConstant;
 import cn.xilikeli.staging.module.file.FileProperties;
 import cn.xilikeli.staging.module.file.Uploader;
 import cn.xilikeli.staging.repository.FileRepository;
 import cn.xilikeli.staging.service.FileService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,14 +28,28 @@ import java.util.List;
  * @since JDK1.8
  */
 @Service
-@AllArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    private final FileRepository fileRepository;
+    private FileRepository fileRepository;
 
-    private final Uploader uploader;
+    private Uploader uploader;
 
-    private final FileProperties fileProperties;
+    private FileProperties fileProperties;
+
+    @Autowired
+    public void setFileRepository(FileRepository fileRepository) {
+        this.fileRepository = fileRepository;
+    }
+
+    @Autowired
+    public void setUploader(Uploader uploader) {
+        this.uploader = uploader;
+    }
+
+    @Autowired
+    public void setFileProperties(FileProperties fileProperties) {
+        this.fileProperties = fileProperties;
+    }
 
     @Override
     public List<FileBO> upload(MultiValueMap<String, MultipartFile> fileMap) {
@@ -77,7 +92,7 @@ public class FileServiceImpl implements FileService {
         if (file.getType().equals(FileConstant.LOCAL)) {
             String s = this.fileProperties.getServePath().split("/")[0];
 
-            if (System.getProperties().getProperty("os.name").toUpperCase().contains("WINDOWS")) {
+            if (System.getProperties().getProperty(CommonConstant.OS_NAME_PROPERTY).toUpperCase().contains(CommonConstant.WINDOWS)) {
                 // replaceAll 是将 windows 平台下的 \ 替换为 /
                 bo.setUrl(this.fileProperties.getDomain() + s + "/" + file.getPath().replaceAll("\\\\", "/"));
             } else {

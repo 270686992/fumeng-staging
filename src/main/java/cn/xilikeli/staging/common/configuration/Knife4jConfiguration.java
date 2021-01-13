@@ -15,14 +15,14 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <p>
- * Swagger2 配置类
+ * Knife4j 配置类
  * 本地访问地址:
  * 官方 UI 访问地址: <a>http://localhost:端口号/swagger-ui.html</a>
  * Bootstrap UI 访问地址: <a>http://localhost:端口号/doc.html</a>
@@ -36,9 +36,9 @@ import java.util.List;
 @Getter
 @Setter
 @Configuration
-@EnableSwagger2
-@ConfigurationProperties(prefix = "swagger")
-public class Swagger2Configuration {
+@EnableSwagger2WebMvc
+@ConfigurationProperties(prefix = "knife4j")
+public class Knife4jConfiguration {
 
     /**
      * API 接口包路径
@@ -85,10 +85,11 @@ public class Swagger2Configuration {
      *
      * @return 返回配置好的 Docket
      */
-    @Bean
-    public Docket createRestApi() {
+    @Bean(value = "defaultApi2")
+    public Docket defaultApi2() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
+                .groupName("2.X版本")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())

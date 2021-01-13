@@ -154,7 +154,7 @@
     </appender>
 
 
-    <logger name="cn.xilikeli.staging.common.log.MDCAccessServletFilter" level="INFO" additivity="false">
+    <logger name="cn.xilikeli.staging.module.log.MdcAccessServletFilter" level="INFO" additivity="false">
         <appender-ref ref="FILE_ACCESS"/>
     </logger>
 

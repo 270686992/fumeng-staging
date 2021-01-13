@@ -1,13 +1,15 @@
 # 文件上传配置
 staging:
   file:
-    # 七牛云配置
+    # 七牛云配置(从你的七牛云账户中获取以下信息)
     qiniuyun:
+      # 密钥
       access-key:
       secret-key:
+      # 对象存储空间名称
       bucket:
     # 文件服务域名
-    domain: http://localhost:8082/ # 本地时使用: http://localhost:8082/, 使用七牛云时使用对象存储的域名
+    domain: http://localhost:8082/ # 本地时使用: http://localhost:8082/, 使用七牛云时使用对象存储空间所配置的域名
     # 排除文件类型(注意: 排除文件类型和包括文件类型目前实现推荐只使用其中一个, 同时使用会以 include 为准)
     exclude:
     # 包括文件类型(注意: 排除文件类型和包括文件类型目前实现推荐只使用其中一个, 同时使用会以 include 为准)

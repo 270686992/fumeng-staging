@@ -39,7 +39,7 @@
 - 结合以上的全局异常统一处理、统一 API 响应结果封装, 将业务消息码与对应的提示信息抽取到了配置文件中, 避免了在代码中硬编码, 具体使用可看项目中的图书 API
 - 一些比较通用的工具类
 - logback 日志集成
-- Swagger2 集成
+- Knife4j 集成
 - 跨域配置
 - 文件上传模块(可扩展的模式, 目前实现了本地上传和七牛云上传, 参考自 [lin-cms-springboot](https://github.com/TaleLin/lin-cms-spring-boot) 实现)
 
@@ -51,17 +51,16 @@
 
 ## 如何使用
 
-1. 如果需要指定 MySQL 依赖(`mysql-connector-java`)的版本, 则先进入 pom.xml 文件指定一下 MySQL 依赖的版本。
+1. 如果你需要指定 MySQL 依赖(`mysql-connector-java`)的版本, 则先进入 pom.xml 文件指定一下 MySQL 依赖的版本。
 2. 进入 src/main/resources, 依次做以下事项
-    1. 更改 application.yml 中的 swagger 配置和数据源配置为你自己所需要的配置。
+    1. 更改 application.yml 中的 knife4j 配置为你自己所需要的配置。
     2. 更改 application-dev.yml 和 application-prod.yml 中的数据源配置、端口号配置和项目自定义配置项为你自己所需要的配置。
 3. 进入 src/main/java 中的 cn.xilikeli.staging.extension.file 包, 打开 config.yml 配置你自己的文件上传配置(七牛云或本地的配置), 接着在该包下的 `UploaderConfiguration` 类中切换为相应的文件上传(七牛云或本地)
-4. 进入项目根目录下的 profile/sql 目录打开 schema.sql 文件导入到你的数据库中。
-5. 运行项目, 打开浏览器输入本地的 Swagger 访问地址测试图书相关接口是否正常。
-    1. 官方 UI 访问地址: `http://localhost:端口号/swagger-ui.html`
-    2. Bootstrap UI 访问地址: `http://localhost:端口号/doc.html`
+4. 进入项目根目录下的 profile/sql 目录打开 schema.sql 文件将其中的数据表导入到你的数据库中。
+5. 运行项目, 打开浏览器输入本地的 Knife4j 访问地址测试图书相关接口是否正常。
+    - 访问地址: `http://localhost:端口号/doc.html`
 6. 以上步骤顺利进行之后即可开始愉悦地使用这个目前还比较简便的脚手架工程编写代码了~
-7. 项目的内容可通过源码中的注释查阅, 项目中的代码提供了丰富的注释。
+7. 项目的内容可通过源码中的注释查阅, 项目中的代码提供了较丰富的注释。
 8. 提示: cn.xilikeli.staging.common.interceptor 包中的 .gitkeep 文件为填充文件, 往这个包增加新类时将这个文件删除即可。 
 
 ## 致谢

@@ -12,9 +12,10 @@ package cn.xilikeli.staging.common.constant;
  */
 public class CommonConstant {
 
-    /**
-     * 字符串形式的 null 值
-     */
     public static final String NULL = "null";
+
+    public static final String OS_NAME_PROPERTY = "os.name";
+
+    public static final String WINDOWS = "WINDOWS";
 
 }

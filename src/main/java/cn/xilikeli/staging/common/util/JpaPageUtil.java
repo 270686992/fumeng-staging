@@ -12,7 +12,7 @@ import java.util.Optional;
 /**
  * <p>
  * JPA 分页工具类
- * 列表数据转换为分页对象
+ * 可将 List 列表数据转换为 Page 分页对象
  * 参考自 CSDN: https://blog.csdn.net/weixx3/article/details/103348630
  * </p>
  *
