@@ -24,9 +24,9 @@ import java.util.List;
  * 文件上传 API 接口控制器
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:25
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Validated

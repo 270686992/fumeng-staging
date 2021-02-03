@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
  * 本地缓存工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 19:26
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Slf4j

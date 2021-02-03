@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
  * 如有在配置文件中配置了相应的 code->message, 在此处通过 code 设置为配置文件中配置的对应消息
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:43
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Aspect
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class ResultAspect {
 
     @AfterReturning(returning = "result", pointcut = "execution(public * cn.xilikeli.staging.controller..*.*(..))")
-    public void doAfterReturning(UnifyResponseVO result) {
+    public void doAfterReturning(UnifyResponseVO<?> result) {
         Integer code = result.getCode();
         // code-message.properties 中配置的 message
         String message = CodeMessageConfiguration.getMessageByCode(code);

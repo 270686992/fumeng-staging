@@ -10,9 +10,9 @@ import java.util.List;
  * 文件上传服务接口
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 09:49
+ * @date 2020/9/28
  * @since JDK1.8
  */
 public interface Uploader {

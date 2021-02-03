@@ -20,9 +20,9 @@ import java.io.ByteArrayInputStream;
  * 文件上传服务实现, 上传到七牛云
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 21:53
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Slf4j

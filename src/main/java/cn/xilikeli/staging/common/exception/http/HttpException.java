@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * HTTP 自定义异常基类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:37
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -29,12 +29,22 @@ public class HttpException extends RuntimeException {
      */
     protected Integer httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
 
+    /**
+     * 是否是默认消息标记
+     * <p>
+     * true: 没有通过构造函数传入 message
+     * <p>
+     * false: 通过构造函数传入了 message
+     */
+    protected Boolean defaultMessageFlag = true;
+
     public HttpException() {
         super(CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
     }
 
     public HttpException(String message) {
         super(message);
+        this.defaultMessageFlag = false;
     }
 
     public HttpException(Integer code) {
@@ -51,12 +61,14 @@ public class HttpException extends RuntimeException {
     public HttpException(Integer code, String message) {
         super(message);
         this.code = code;
+        this.defaultMessageFlag = false;
     }
 
     public HttpException(Integer code, String message, Integer httpStatusCode) {
         super(message);
         this.code = code;
         this.httpStatusCode = httpStatusCode;
+        this.defaultMessageFlag = false;
     }
 
     public HttpException(Throwable cause, Integer code) {
@@ -72,13 +84,9 @@ public class HttpException extends RuntimeException {
 
     public HttpException(String message, Throwable cause) {
         super(message, cause);
+        this.defaultMessageFlag = false;
     }
 
-    /**
-     * for better performance
-     *
-     * @return Throwable
-     */
     public Throwable doFillInStackTrace() {
         return super.fillInStackTrace();
     }

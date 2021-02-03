@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 更新资源成功的响应结果
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:48
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class UpdatedResponseVO<T> extends UnifyResponseVO<T> {

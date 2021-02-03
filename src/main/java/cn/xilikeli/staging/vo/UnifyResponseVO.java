@@ -13,9 +13,9 @@ import lombok.Data;
  * 统一 API 响应结果
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:23
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Data
@@ -136,6 +136,78 @@ public class UnifyResponseVO<T> {
         this.success = success;
         this.data = data;
         this.request = RequestUtil.getSimpleRequest();
+    }
+
+    public static <T> UnifyResponseVO<T> succeed() {
+        return new UnifyResponseVO<>();
+    }
+
+    public static <T> UnifyResponseVO<T> succeed(Integer code) {
+        return new UnifyResponseVO<>(code, true);
+    }
+
+    public static <T> UnifyResponseVO<T> succeed(String message) {
+        return new UnifyResponseVO<>(CodeEnum.SUCCESS.getCode(), message, true);
+    }
+
+    public static <T> UnifyResponseVO<T> succeed(Integer code, String message) {
+        return new UnifyResponseVO<>(code, message, true);
+    }
+
+    public static <T> UnifyResponseVO<T> succeedWith(T data) {
+        return new UnifyResponseVO<>(data);
+    }
+
+    public static <T> UnifyResponseVO<T> succeedWith(T data, Integer code) {
+        return new UnifyResponseVO<>(code, data, true);
+    }
+
+    public static <T> UnifyResponseVO<T> succeedWith(T data, String message) {
+        return new UnifyResponseVO<>(CodeEnum.SUCCESS.getCode(), message, true, data);
+    }
+
+    public static <T> UnifyResponseVO<T> succeedWith(T data, Integer code, String message) {
+        return new UnifyResponseVO<>(code, message, true, data);
+    }
+
+    public static <T> UnifyResponseVO<T> failed() {
+        return new UnifyResponseVO<>(CodeEnum.UNIVERSAL_ERROR.getCode(), CodeEnum.UNIVERSAL_ERROR.getDescription(), false);
+    }
+
+    public static <T> UnifyResponseVO<T> failed(Integer code) {
+        return new UnifyResponseVO<>(code, false);
+    }
+
+    public static <T> UnifyResponseVO<T> failed(String message) {
+        return new UnifyResponseVO<>(CodeEnum.UNIVERSAL_ERROR.getCode(), message, false);
+    }
+
+    public static <T> UnifyResponseVO<T> failed(Integer code, String message) {
+        return new UnifyResponseVO<>(code, message, false);
+    }
+
+    public static <T> UnifyResponseVO<T> failedWith(T data) {
+        return new UnifyResponseVO<>(CodeEnum.UNIVERSAL_ERROR.getCode(), CodeEnum.UNIVERSAL_ERROR.getDescription(), false, data);
+    }
+
+    public static <T> UnifyResponseVO<T> failedWith(T data, Integer code) {
+        return new UnifyResponseVO<>(code, data, false);
+    }
+
+    public static <T> UnifyResponseVO<T> failedWith(T data, String message) {
+        return new UnifyResponseVO<>(CodeEnum.UNIVERSAL_ERROR.getCode(), message, false, data);
+    }
+
+    public static <T> UnifyResponseVO<T> failedWith(T data, Integer code, String message) {
+        return new UnifyResponseVO<>(code, message, false, data);
+    }
+
+    public boolean isSuccess() {
+        return this.success;
+    }
+
+    public boolean isUnSuccess() {
+        return !this.success;
     }
 
 }

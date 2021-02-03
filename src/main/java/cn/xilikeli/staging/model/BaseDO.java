@@ -18,9 +18,9 @@ import java.util.Date;
  * 实体的抽象基类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:02
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter

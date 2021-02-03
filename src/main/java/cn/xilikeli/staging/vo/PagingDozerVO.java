@@ -12,9 +12,9 @@ import java.util.List;
  * 分页数据统一 VO,带有转换为目标类型的分页数据的功能
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:20
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @SuppressWarnings("all")

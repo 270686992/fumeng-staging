@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 图书 Repository 接口
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:27
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public interface BookRepository extends JpaRepository<BookDO, Long> {

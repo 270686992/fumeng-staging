@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
  * 通过日志监视 service 执行时间
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 11:53
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Aspect

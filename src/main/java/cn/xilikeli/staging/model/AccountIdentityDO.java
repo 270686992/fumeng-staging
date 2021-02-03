@@ -18,7 +18,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  * 用户认证信息实体
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/14
  * @since JDK1.8

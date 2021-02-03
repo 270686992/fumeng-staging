@@ -12,9 +12,9 @@ import java.util.Date;
  * 日期工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 22:09
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Slf4j
@@ -94,11 +94,33 @@ public class DateUtil {
             sdf.setLenient(false);
             date = sdf.parse(dateStr);
         } catch (ParseException e) {
-            log.error("DateUtil ===> 将字符串形式的日期时间转换为 Date 类型的日期时间时出现异常: ", e);
+            log.error("DateUtil===将字符串形式的日期时间转换为 Date 类型的日期时间时出现异常: ", e);
             return null;
         }
 
         return date;
+    }
+
+    /**
+     * 计算两个日期之间相差的天数
+     *
+     * @param smallDate 较小的时间
+     * @param bigDate   较大的时间
+     * @return 相差天数
+     */
+    public static int daysBetween(Date smallDate, Date bigDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        smallDate = sdf.parse(sdf.format(smallDate));
+        bigDate = sdf.parse(sdf.format(bigDate));
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(smallDate);
+        long time1 = cal.getTimeInMillis();
+        cal.setTime(bigDate);
+        long time2 = cal.getTimeInMillis();
+        long betweenDays = (time2 - time1) / (1000 * 3600 * 24);
+
+        return Integer.parseInt(String.valueOf(betweenDays));
     }
 
 }

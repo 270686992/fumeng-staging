@@ -11,9 +11,9 @@ import org.springframework.core.annotation.Order;
  * 文件上传配置类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:09
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Configuration
