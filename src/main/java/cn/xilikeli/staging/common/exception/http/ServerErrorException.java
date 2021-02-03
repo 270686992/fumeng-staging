@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 服务器内部错误异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:40
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class ServerErrorException extends HttpException {
 
     public ServerErrorException() {
         super(CodeEnum.INTERNAL_SERVER_ERROR.getCode(), CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public ServerErrorException(String message) {
@@ -40,6 +41,7 @@ public class ServerErrorException extends HttpException {
     public ServerErrorException(Integer code) {
         super(code, CodeEnum.INTERNAL_SERVER_ERROR.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public ServerErrorException(Integer code, String message) {

@@ -10,7 +10,7 @@ import java.util.Map;
  * 基于 ThreadLocal 的线程安全的当前登录用户, 如果用户未登录, 则得到 null
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/14
  * @since JDK1.8

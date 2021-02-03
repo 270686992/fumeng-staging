@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 令牌无效异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class TokenInvalidException extends HttpException {
 
     public TokenInvalidException() {
         super(CodeEnum.TOKEN_INVALID.getCode(), CodeEnum.TOKEN_INVALID.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public TokenInvalidException(String message) {
@@ -40,6 +41,7 @@ public class TokenInvalidException extends HttpException {
     public TokenInvalidException(Integer code) {
         super(code, CodeEnum.TOKEN_INVALID.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public TokenInvalidException(Integer code, String message) {

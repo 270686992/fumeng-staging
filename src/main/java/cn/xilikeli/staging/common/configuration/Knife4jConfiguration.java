@@ -23,14 +23,12 @@ import java.util.List;
 /**
  * <p>
  * Knife4j 配置类
- * 本地访问地址:
- * 官方 UI 访问地址: <a>http://localhost:端口号/swagger-ui.html</a>
- * Bootstrap UI 访问地址: <a>http://localhost:端口号/doc.html</a>
+ * 本地访问地址: <a>http://localhost:端口号/doc.html</a>
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 00:53
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Getter
@@ -89,7 +87,7 @@ public class Knife4jConfiguration {
     public Docket defaultApi2() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
-                .groupName("2.X版本")
+                .groupName("knife4j-2.0.8")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
@@ -112,7 +110,7 @@ public class Knife4jConfiguration {
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false)
-                .scalarExample("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjM0LCJzY29wZSI6OCwiZXhwIjoxNjc1MDU2NzcyLCJpYXQiOjE1ODg2NTY3NzJ9.FEAYgvHOOkk_x2l4od0bc5RitaXT4xaSUxaL65NT0-w(登录接口获得的令牌信息, 与最前面的 Bearer 要相隔一个空格)")
+                .scalarExample("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjM0LCJzY29wZSI6OCwiZXhwIjoxNjc1MDU2NzcyLCJpYXQiOjE1ODg2NTY3NzJ9.FEAYgvHOOkk_x2l4od0bc5RitaXT4xaSUxaL65NT0-w")
                 .build();
 
         pars.add(tokenPar.build());

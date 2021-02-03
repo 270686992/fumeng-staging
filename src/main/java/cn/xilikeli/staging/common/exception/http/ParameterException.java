@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 参数错误异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:40
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class ParameterException extends HttpException {
 
     public ParameterException() {
         super(CodeEnum.PARAMETER_ERROR.getCode(), CodeEnum.PARAMETER_ERROR.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public ParameterException(String message) {
@@ -40,6 +41,7 @@ public class ParameterException extends HttpException {
     public ParameterException(Integer code) {
         super(code, CodeEnum.PARAMETER_ERROR.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public ParameterException(Integer code, String message) {

@@ -9,9 +9,9 @@ import com.amdelamar.jhash.exception.InvalidHashException;
  * 加密工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:07
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class EncryptUtil {

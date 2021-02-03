@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 文件 Repository 接口
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:39
+ * @date 2020/9/28
  * @since JDK1.8
  */
 public interface FileRepository extends JpaRepository<FileDO, Long> {

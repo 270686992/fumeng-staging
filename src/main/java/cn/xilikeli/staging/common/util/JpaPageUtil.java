@@ -16,9 +16,9 @@ import java.util.Optional;
  * 参考自 CSDN: https://blog.csdn.net/weixx3/article/details/103348630
  * </p>
  *
- * @author 踏雪彡寻梅@浮生若梦
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:11
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class JpaPageUtil {

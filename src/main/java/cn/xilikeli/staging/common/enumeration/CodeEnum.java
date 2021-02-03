@@ -1,16 +1,23 @@
 package cn.xilikeli.staging.common.enumeration;
 
+import java.util.stream.Stream;
+
 /**
  * <p>
- * 消息码枚举类
+ * 通用消息码枚举类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:27
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public enum CodeEnum {
+
+    /**
+     * 未定义
+     */
+    UNDEFINED(-1, "Undefined", "未定义", false),
 
     /**
      * 通用成功消息码
@@ -45,102 +52,102 @@ public enum CodeEnum {
     /**
      * 参数错误消息码
      */
-    PARAMETER_ERROR(10001, "Parameters Error", "参数错误", false),
+    PARAMETER_ERROR(10001, "Parameters Error", "通用参数错误", false),
+
+    /**
+     * 通用操作失败消息码
+     */
+    FAIL(10002, "Failed", "操作失败", false),
 
     /**
      * 请求体不可为空消息码
      */
-    REQUEST_BODY_CANNOT_EMPTY(10002, "Request Body Cannot Empty", "请求体不可为空", false),
+    REQUEST_BODY_CANNOT_EMPTY(10003, "Request Body Cannot Empty", "请求体不可为空", false),
 
     /**
-     * 找不到路由消息码
+     * 找不到 API 接口消息码
      */
-    NOT_FOUND_ROUTE(10003, "Not Found Route", "找不到相应的视图处理器", false),
-
-    /**
-     * 通用失败消息码
-     */
-    FAIL(10004, "Failed", "失败", false),
-
-    /**
-     * 认证失败消息码
-     */
-    UN_AUTHENTICATION(10005, "Authentication Failed", "认证失败", false),
-
-    /**
-     * 授权失败消息码
-     */
-    UN_AUTHORIZATION(10006, "Authorization Failed", "授权失败", false),
-
-    /**
-     * 资源不存在消息码
-     */
-    NOT_FOUND(10007, "Not Found", "资源不存在", false),
-
-    /**
-     * 令牌失效消息码
-     */
-    TOKEN_INVALID(10008, "Token Invalid", "令牌失效", false),
-
-    /**
-     * 令牌过期消息码
-     */
-    TOKEN_EXPIRED(10009, "Token Expired", "令牌过期", false),
+    NOT_FOUND_API_ROUTE(10004, "Not Found API Route", "找不到相应的 API 接口", false),
 
     /**
      * 字段重复消息码
      */
-    DUPLICATED(10010, "Duplicated", "字段重复", false),
-
-    /**
-     * 禁止操作消息码
-     */
-    FORBIDDEN(10011, "Forbidden", "禁止操作", false),
+    DUPLICATED(10005, "Duplicated", "字段重复", false),
 
     /**
      * 请求方法不允许消息码
      */
-    METHOD_NOT_ALLOWED(10012, "Method Not Allowed", "请求方法不允许", false),
-
-    /**
-     * 刷新令牌获取失败消息码
-     */
-    REFRESH_TOKEN_FAILED(10013, "Get Refresh Token Failed", "刷新令牌获取失败", false),
-
-    /**
-     * 文件体积过大消息码
-     */
-    FILE_TOO_LARGE(10014, "File Too Large", "文件体积过大, 全部文件大小不能超过", false),
-
-    /**
-     * 文件数量过多消息码
-     */
-    FILE_TOO_MANY(10015, "File Too Many", "文件数量过多", false),
-
-    /**
-     * 文件扩展名不符合规范消息码
-     */
-    FILE_EXTENSION(10016, "File Extension Not Allowed", "文件扩展名不符合规范", false),
-
-    /**
-     * 请求过于频繁, 请稍后重试消息码
-     */
-    REQUEST_LIMIT(10017, "Too Many Requests", "请求过于频繁, 请稍后重试", false),
+    METHOD_NOT_ALLOWED(10006, "Method Not Allowed", "请求方法不允许", false),
 
     /**
      * 丢失参数消息码
      */
-    MISSING_PARAMETER(10018, "Missing Parameter", "丢失参数", false),
+    MISSING_PARAMETER(10007, "Missing Parameter", "丢失参数", false),
 
     /**
      * 方法参数类型不匹配消息码
      */
-    METHOD_ARGUMENT_TYPE_MISMATCH(10019, "Method Argument Type Mismatch", "方法参数类型不匹配", false),
+    METHOD_ARGUMENT_TYPE_MISMATCH(10008, "Method Argument Type Mismatch", "方法参数类型不匹配", false),
 
     /**
      * Http 信息转换错误消息码
      */
-    HTTP_MESSAGE_CONVERSION_ERROR(10020, "Http Message Conversion Error", "Http 信息转换错误, 请检查请求参数是否正确", false),
+    HTTP_MESSAGE_CONVERSION_ERROR(10009, "Http Message Conversion Error", "Http 信息转换错误, 请检查请求参数是否正确", false),
+
+    /**
+     * 资源不存在消息码
+     */
+    NOT_FOUND(10010, "Not Found", "资源不存在", false),
+
+    /**
+     * 请求过于频繁, 请稍后重试消息码
+     */
+    REQUEST_LIMIT(10011, "Too Many Requests", "请求过于频繁, 请稍后重试", false),
+
+    /**
+     * 认证失败消息码
+     */
+    UN_AUTHENTICATION(10012, "Authentication Failed", "认证失败", false),
+
+    /**
+     * 授权失败消息码
+     */
+    UN_AUTHORIZATION(10013, "Authorization Failed", "授权失败", false),
+
+    /**
+     * 禁止操作消息码
+     */
+    FORBIDDEN(10014, "Forbidden", "禁止操作", false),
+
+    /**
+     * 令牌失效消息码
+     */
+    TOKEN_INVALID(10015, "Token Invalid", "令牌失效", false),
+
+    /**
+     * 令牌过期消息码
+     */
+    TOKEN_EXPIRED(10016, "Token Expired", "令牌过期", false),
+
+    /**
+     * 刷新令牌获取失败消息码
+     */
+    REFRESH_TOKEN_FAILED(10017, "Get Refresh Token Failed", "刷新令牌获取失败", false),
+
+    /**
+     * 文件体积过大消息码
+     */
+    FILE_TOO_LARGE(10018, "File Too Large", "文件体积过大, 全部文件大小不能超过", false),
+
+    /**
+     * 文件数量过多消息码
+     */
+    FILE_TOO_MANY(10019, "File Too Many", "文件数量过多", false),
+
+    /**
+     * 文件扩展名不符合规范消息码
+     */
+    FILE_EXTENSION(10020, "File Extension Not Allowed", "文件扩展名不符合规范", false),
 
     /**
      * 未找到文件消息码
@@ -194,5 +201,19 @@ public enum CodeEnum {
     public Boolean getSuccess() {
         return success;
     }
+
+    /**
+     * 将消息码 code 转换为对应的枚举类型
+     *
+     * @param code 消息码
+     * @return 转换成功返回消息码 code 对应的枚举类型, 转换失败返回未定义枚举
+     */
+    public static CodeEnum toEnum(Integer code) {
+        return Stream.of(CodeEnum.values())
+                .filter(errorCodeEnum -> errorCodeEnum.code.equals(code))
+                .findAny()
+                .orElse(UNDEFINED);
+    }
+
 
 }

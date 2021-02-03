@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 操作失败异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:38
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class FailedException extends HttpException {
 
     public FailedException() {
         super(CodeEnum.FAIL.getCode(), CodeEnum.FAIL.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public FailedException(String message) {
@@ -40,6 +41,7 @@ public class FailedException extends HttpException {
     public FailedException(Integer code) {
         super(code, CodeEnum.FAIL.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public FailedException(Integer code, String message) {

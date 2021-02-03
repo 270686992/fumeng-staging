@@ -26,9 +26,9 @@ import java.util.List;
  * 示例 Demo, 图书表 SQL 位于项目根目录下的 profile/sql 目录中
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:29
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Validated

@@ -5,9 +5,9 @@ package cn.xilikeli.staging.common.constant;
  * 公用常量类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 19:27
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class CommonConstant {

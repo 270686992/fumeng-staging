@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 文件扩展名异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:45
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class FileExtensionException extends HttpException {
 
     public FileExtensionException() {
         super(CodeEnum.FILE_EXTENSION.getCode(), CodeEnum.FILE_EXTENSION.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public FileExtensionException(String message) {
@@ -40,6 +41,7 @@ public class FileExtensionException extends HttpException {
     public FileExtensionException(Integer code) {
         super(code, CodeEnum.FILE_EXTENSION.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public FileExtensionException(Integer code, String message) {

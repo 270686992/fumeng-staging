@@ -18,9 +18,9 @@ import static javax.persistence.GenerationType.IDENTITY;
  * 图书实体
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:20
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Data

@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 认证异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:41
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -32,6 +32,7 @@ public class AuthenticationException extends HttpException {
 
     public AuthenticationException() {
         super(CodeEnum.UN_AUTHENTICATION.getCode(), CodeEnum.UN_AUTHENTICATION.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public AuthenticationException(String message) {
@@ -41,6 +42,7 @@ public class AuthenticationException extends HttpException {
     public AuthenticationException(Integer code) {
         super(code, CodeEnum.UN_AUTHENTICATION.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public AuthenticationException(Integer code, String message) {

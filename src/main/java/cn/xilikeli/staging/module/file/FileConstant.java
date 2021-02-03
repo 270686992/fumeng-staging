@@ -5,9 +5,9 @@ package cn.xilikeli.staging.module.file;
  * 文件相关常量值
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 11:03
+ * @date 2020/9/28
  * @since JDK1.8
  */
 public class FileConstant {
