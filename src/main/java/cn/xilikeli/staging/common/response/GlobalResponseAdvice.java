@@ -2,7 +2,10 @@ package cn.xilikeli.staging.common.response;
 
 import cn.xilikeli.staging.common.exception.http.FailedException;
 import cn.xilikeli.staging.common.util.ResponseUtil;
+import cn.xilikeli.staging.vo.CreatedResponseVO;
+import cn.xilikeli.staging.vo.DeletedResponseVO;
 import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.UpdatedResponseVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +35,18 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
     @SuppressWarnings("all")
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> aClass) {
         // 如果接口返回的类型本身就是 UnifyResponseVO 那就没有必要进行额外的操作, 返回 false
+        if (returnType.getParameterType().equals(CreatedResponseVO.class)) {
+            return false;
+        }
+
+        if (returnType.getParameterType().equals(UpdatedResponseVO.class)) {
+            return false;
+        }
+
+        if (returnType.getParameterType().equals(DeletedResponseVO.class)) {
+            return false;
+        }
+
         return !returnType.getParameterType().equals(UnifyResponseVO.class);
     }
 

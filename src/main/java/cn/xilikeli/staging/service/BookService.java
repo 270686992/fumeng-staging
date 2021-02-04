@@ -1,5 +1,6 @@
 package cn.xilikeli.staging.service;
 
+import cn.xilikeli.staging.dto.book.BookDTO;
 import cn.xilikeli.staging.model.BookDO;
 import org.springframework.data.domain.Page;
 
@@ -18,12 +19,34 @@ import java.util.List;
 public interface BookService {
 
     /**
+     * 添加一本图书
+     *
+     * @param bookDTO 图书 DTO
+     */
+    void createBook(BookDTO bookDTO);
+
+    /**
      * 根据图书 ID 获取相应图书
      *
      * @param bookId 图书 ID
      * @return 返回获取的图书
      */
     BookDO getBookById(Long bookId);
+
+    /**
+     * 根据图书 ID 更新该图书的信息
+     *
+     * @param bookId  图书 ID
+     * @param bookDTO 图书 DTO
+     */
+    void updateBookById(Long bookId, BookDTO bookDTO);
+
+    /**
+     * 根据图书 ID 删除相应图书
+     *
+     * @param bookId 图书 ID
+     */
+    void deleteBookById(Long bookId);
 
     /**
      * 获取所有图书

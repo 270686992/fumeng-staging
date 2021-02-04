@@ -1,7 +1,6 @@
 package cn.xilikeli.staging.repository;
 
 import cn.xilikeli.staging.model.FileDO;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @date 2020/9/28
  * @since JDK1.8
  */
-public interface FileRepository extends JpaRepository<FileDO, Long> {
+public interface FileRepository extends BaseRepository<FileDO, Long> {
 
     /**
      * 通过文件的 md5 值查询相应的文件
