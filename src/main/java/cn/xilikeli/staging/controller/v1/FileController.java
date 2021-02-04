@@ -1,9 +1,7 @@
 package cn.xilikeli.staging.controller.v1;
 
 import cn.xilikeli.staging.bo.FileBO;
-import cn.xilikeli.staging.common.util.ResponseUtil;
 import cn.xilikeli.staging.service.FileService;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -53,10 +51,9 @@ public class FileController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "上传的文件", dataType = "MultipartFile", required = true)
     })
-    public UnifyResponseVO<List<FileBO>> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
+    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
         MultiValueMap<String, MultipartFile> fileMap = multipartHttpServletRequest.getMultiFileMap();
-        List<FileBO> uploadFileList = this.fileService.upload(fileMap);
-        return ResponseUtil.generateUnifyResponseVO(uploadFileList);
+        return this.fileService.upload(fileMap);
     }
 
 }

@@ -54,6 +54,15 @@ public class UnifyResponseVO<T> {
     @ApiModelProperty(value = "请求的 API 接口")
     private String request;
 
+    public boolean isSuccess() {
+        return this.success;
+    }
+
+    @ApiModelProperty(value = "是否不成功")
+    public boolean isUnSuccess() {
+        return !this.success;
+    }
+
     /**
      * 统一 API 响应结果默认构造函数
      */
@@ -200,14 +209,6 @@ public class UnifyResponseVO<T> {
 
     public static <T> UnifyResponseVO<T> failedWith(T data, Integer code, String message) {
         return new UnifyResponseVO<>(code, message, false, data);
-    }
-
-    public boolean isSuccess() {
-        return this.success;
-    }
-
-    public boolean isUnSuccess() {
-        return !this.success;
     }
 
 }
