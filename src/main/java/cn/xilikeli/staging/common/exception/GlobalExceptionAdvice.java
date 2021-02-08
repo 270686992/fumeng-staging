@@ -3,7 +3,7 @@ package cn.xilikeli.staging.common.exception;
 import cn.xilikeli.staging.common.configuration.CodeMessageConfiguration;
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
 import cn.xilikeli.staging.common.exception.http.HttpException;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.TypeMismatchException;

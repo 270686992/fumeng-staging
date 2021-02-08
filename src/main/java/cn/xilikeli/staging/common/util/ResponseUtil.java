@@ -1,7 +1,7 @@
 package cn.xilikeli.staging.common.util;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

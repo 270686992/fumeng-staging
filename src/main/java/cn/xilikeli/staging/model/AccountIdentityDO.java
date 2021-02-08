@@ -2,8 +2,10 @@ package cn.xilikeli.staging.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
@@ -26,6 +28,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 @Entity
 @Table(name = "account_identity")
+@Builder
+@Accessors(chain = true)
+@DynamicInsert()
+@DynamicUpdate()
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "delete_time is null")
 @ApiModel(value = "用户认证信息实体", description = "用户认证信息实体")

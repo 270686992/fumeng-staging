@@ -2,10 +2,10 @@ package cn.xilikeli.staging.common.response;
 
 import cn.xilikeli.staging.common.exception.http.FailedException;
 import cn.xilikeli.staging.common.util.ResponseUtil;
-import cn.xilikeli.staging.vo.CreatedResponseVO;
-import cn.xilikeli.staging.vo.DeletedResponseVO;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
-import cn.xilikeli.staging.vo.UpdatedResponseVO;
+import cn.xilikeli.staging.vo.response.CreatedResponseVO;
+import cn.xilikeli.staging.vo.response.DeletedResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UpdatedResponseVO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
