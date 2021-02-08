@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.vo;
+package cn.xilikeli.staging.vo.response;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
 import cn.xilikeli.staging.common.util.RequestUtil;

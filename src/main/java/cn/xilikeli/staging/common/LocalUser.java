@@ -1,6 +1,6 @@
 package cn.xilikeli.staging.common;
 
-import cn.xilikeli.staging.model.AccountDO;
+import cn.xilikeli.staging.dto.account.AccountDTO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,9 +24,9 @@ public class LocalUser {
      *
      * @return 返回当前登录用户信息, 如果未登录则返回 null
      */
-    public static AccountDO getLocalUser() {
+    public static AccountDTO getLocalUser() {
         Map<String, Object> map = LocalUser.threadLocal.get();
-        return (AccountDO) map.get("account");
+        return (AccountDTO) map.get("account");
     }
 
     /**
@@ -45,7 +45,7 @@ public class LocalUser {
      * @param account 当前登录用户信息
      * @param scope   当前登录用户的用户级别
      */
-    public static void setLocalUser(AccountDO account, Integer scope) {
+    public static void setLocalUser(AccountDTO account, Integer scope) {
         Map<String, Object> map = new HashMap<>(16);
         map.put("account", account);
         map.put("scope", scope);

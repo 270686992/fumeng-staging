@@ -1,7 +1,7 @@
 package cn.xilikeli.staging.common.aop;
 
 import cn.xilikeli.staging.common.configuration.CodeMessageConfiguration;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

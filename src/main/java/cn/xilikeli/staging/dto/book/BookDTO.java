@@ -1,5 +1,6 @@
 package cn.xilikeli.staging.dto.book;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(value = "图书 DTO", description = "图书 DTO")
 public class BookDTO {
 
     /**

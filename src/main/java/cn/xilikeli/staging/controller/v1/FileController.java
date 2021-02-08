@@ -1,6 +1,7 @@
 package cn.xilikeli.staging.controller.v1;
 
 import cn.xilikeli.staging.bo.FileBO;
+import cn.xilikeli.staging.common.interceptor.ScopeLevel;
 import cn.xilikeli.staging.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -46,6 +47,7 @@ public class FileController {
      * @param multipartHttpServletRequest 携带文件的 request
      * @return 文件信息
      */
+    @ScopeLevel
     @PostMapping
     @ApiOperation(value = "文件上传接口", notes = "文件上传接口", httpMethod = "POST")
     @ApiImplicitParams({

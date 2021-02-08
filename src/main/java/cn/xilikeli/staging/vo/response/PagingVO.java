@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.vo;
+package cn.xilikeli.staging.vo.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

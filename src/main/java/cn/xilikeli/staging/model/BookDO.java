@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
@@ -28,6 +30,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "book")
 @Builder
 @Accessors(chain = true)
+@DynamicInsert()
+@DynamicUpdate()
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
