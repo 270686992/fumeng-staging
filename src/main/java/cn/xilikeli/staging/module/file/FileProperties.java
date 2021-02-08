@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
  * 文件上传属性配置类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:22
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Component

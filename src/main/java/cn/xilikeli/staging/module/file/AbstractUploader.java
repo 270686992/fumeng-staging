@@ -14,9 +14,9 @@ import java.util.UUID;
  * 文件上传服务抽象基类, 模版
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:19
+ * @date 2020/9/28
  * @since JDK1.8
  */
 public abstract class AbstractUploader implements Uploader {

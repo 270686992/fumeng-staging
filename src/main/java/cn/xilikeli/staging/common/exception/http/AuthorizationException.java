@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 授权异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class AuthorizationException extends HttpException {
 
     public AuthorizationException() {
         super(CodeEnum.UN_AUTHORIZATION.getCode(), CodeEnum.UN_AUTHORIZATION.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public AuthorizationException(String message) {
@@ -40,6 +41,7 @@ public class AuthorizationException extends HttpException {
     public AuthorizationException(Integer code) {
         super(code, CodeEnum.UN_AUTHORIZATION.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public AuthorizationException(Integer code, String message) {

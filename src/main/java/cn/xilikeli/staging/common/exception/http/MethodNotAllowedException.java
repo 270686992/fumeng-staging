@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 
 /**
  * <p>
- * 方法不允许异常
+ * 请求方法不允许异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class MethodNotAllowedException extends HttpException {
 
     public MethodNotAllowedException() {
         super(CodeEnum.METHOD_NOT_ALLOWED.getCode(), CodeEnum.METHOD_NOT_ALLOWED.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public MethodNotAllowedException(String message) {
@@ -40,6 +41,7 @@ public class MethodNotAllowedException extends HttpException {
     public MethodNotAllowedException(Integer code) {
         super(code, CodeEnum.METHOD_NOT_ALLOWED.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public MethodNotAllowedException(Integer code, String message) {

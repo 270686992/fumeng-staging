@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 禁止操作异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:39
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class ForbiddenException extends HttpException {
 
     public ForbiddenException() {
         super(CodeEnum.FORBIDDEN.getCode(), CodeEnum.FORBIDDEN.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public ForbiddenException(String message) {
@@ -40,6 +41,7 @@ public class ForbiddenException extends HttpException {
     public ForbiddenException(Integer code) {
         super(code, CodeEnum.FORBIDDEN.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public ForbiddenException(Integer code, String message) {

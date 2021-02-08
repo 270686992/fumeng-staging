@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 文件数量太多异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:39
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class FileTooManyException extends HttpException {
 
     public FileTooManyException() {
         super(CodeEnum.FILE_TOO_MANY.getCode(), CodeEnum.FILE_TOO_MANY.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public FileTooManyException(String message) {
@@ -40,6 +41,7 @@ public class FileTooManyException extends HttpException {
     public FileTooManyException(Integer code) {
         super(code, CodeEnum.FILE_TOO_MANY.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public FileTooManyException(Integer code, String message) {

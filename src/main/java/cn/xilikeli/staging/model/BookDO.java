@@ -2,29 +2,42 @@ package cn.xilikeli.staging.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 /**
  * <p>
  * 图书实体
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:20
+ * @date 2020/9/24
  * @since JDK1.8
  */
-@Entity
 @Data
+@Entity
+@Table(name = "book")
+@Builder
+@Accessors(chain = true)
+@DynamicInsert()
+@DynamicUpdate()
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "delete_time is null")
 @ApiModel(value = "图书实体", description = "图书实体")
-public class Book extends BaseEntity {
+public class BookDO extends BaseDO {
 
     private static final long serialVersionUID = -187723241117592869L;
 
@@ -32,6 +45,7 @@ public class Book extends BaseEntity {
      * 图书 ID
      */
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @ApiModelProperty(value = "图书 ID")
     private Long id;
 

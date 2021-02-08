@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 刷新令牌失败异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class RefreshTokenFailedException extends HttpException {
 
     public RefreshTokenFailedException() {
         super(CodeEnum.REFRESH_TOKEN_FAILED.getCode(), CodeEnum.REFRESH_TOKEN_FAILED.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public RefreshTokenFailedException(String message) {
@@ -40,6 +41,7 @@ public class RefreshTokenFailedException extends HttpException {
     public RefreshTokenFailedException(Integer code) {
         super(code, CodeEnum.REFRESH_TOKEN_FAILED.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public RefreshTokenFailedException(Integer code, String message) {

@@ -14,9 +14,9 @@ import org.springframework.web.filter.CorsFilter;
  * 公用配置类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 02:05
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Configuration(proxyBeanMethods = false)

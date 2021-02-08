@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 资源不存在异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 01:39
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class NotFoundException extends HttpException {
 
     public NotFoundException() {
         super(CodeEnum.NOT_FOUND.getCode(), CodeEnum.NOT_FOUND.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public NotFoundException(String message) {
@@ -40,6 +41,7 @@ public class NotFoundException extends HttpException {
     public NotFoundException(Integer code) {
         super(code, CodeEnum.NOT_FOUND.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public NotFoundException(Integer code, String message) {

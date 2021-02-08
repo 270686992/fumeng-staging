@@ -16,9 +16,9 @@ import java.util.*;
  * JWT Token 令牌工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:15
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Component
@@ -35,9 +35,13 @@ public class JwtTokenUtil {
     private static Integer expireTime;
 
     /**
-     * 用户默认分组级别
+     * 默认分发的分组级别
      */
     private static final Integer DEFAULT_SCOPE = 8;
+
+    public static final String ACCOUNT_ID_KEY = "accountId";
+
+    public static final String SCOPE_LEVEL_KEY = "scopeLevel";
 
     @Value("${staging.security.jwt-key}")
     public void setJwtKey(String jwtKey) {
@@ -50,24 +54,24 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 使用 uid 和 scope 生成 JWT 令牌并返回
+     * 使用 accountId 和 scopeLevel 生成 JWT 令牌并返回
      *
-     * @param uid   获取 JWT 令牌的用户的标识
-     * @param scope 获取 JWT 令牌的用户的分组级别
+     * @param accountId  获取 JWT 令牌的用户的标识
+     * @param scopeLevel 获取 JWT 令牌的用户的分组级别
      * @return 返回生成的 JWT 令牌
      */
-    public static String makeToken(Integer uid, Integer scope) {
-        return JwtTokenUtil.getToken(uid, scope);
+    public static String makeToken(Long accountId, Integer scopeLevel) {
+        return JwtTokenUtil.getToken(accountId, scopeLevel);
     }
 
     /**
-     * 使用 uid 和用户默认分组级别生成 JWT 令牌并返回
+     * 使用 accountId 和用户默认分组级别生成 JWT 令牌并返回
      *
-     * @param uid 获取 JWT 令牌的用户的标识
+     * @param accountId 获取 JWT 令牌的用户的标识
      * @return 返回生成的 JWT 令牌
      */
-    public static String makeToken(Integer uid) {
-        return JwtTokenUtil.getToken(uid, JwtTokenUtil.DEFAULT_SCOPE);
+    public static String makeToken(Long accountId) {
+        return JwtTokenUtil.makeToken(accountId, JwtTokenUtil.DEFAULT_SCOPE);
     }
 
     /**
@@ -97,7 +101,7 @@ public class JwtTokenUtil {
      * 校验 JWT 令牌是否合法
      *
      * @param token 校验的 JWT 令牌
-     * @return 校验成功返回 true,校验失败返回 false
+     * @return 校验成功返回 true, 校验失败返回 false
      */
     public static Boolean verifyToken(String token) {
         try {
@@ -116,14 +120,13 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 使用 uid 和 scope 生成 JWT 令牌
+     * 使用 accountId 和 scopeLevel 生成 JWT 令牌
      *
-     * @param uid   获取 JWT 令牌的用户的标识
-     * @param scope 获取 JWT 令牌的用户的分组级别
+     * @param accountId  获取 JWT 令牌的用户的标识
+     * @param scopeLevel 获取 JWT 令牌的用户的分组级别
      * @return 返回生成的 JWT 令牌
      */
-    private static String getToken(Integer uid, Integer scope) {
-        // jwt 的常用的两个库: jjwt,auth0,这里使用 auth0
+    private static String getToken(Long accountId, Integer scopeLevel) {
         // 生成令牌的算法
         Algorithm algorithm = Algorithm.HMAC256(JwtTokenUtil.jwtKey);
 
@@ -132,9 +135,9 @@ public class JwtTokenUtil {
 
         // 生成 JWT 令牌
         return JWT.create()
-                .withClaim("uid", uid)
-                .withClaim("scope", scope)
-                .withIssuedAt(map.get("now"))
+                .withClaim(ACCOUNT_ID_KEY, accountId)
+                .withClaim(SCOPE_LEVEL_KEY, scopeLevel)
+                .withIssuedAt(map.get("issueTime"))
                 .withExpiresAt(map.get("expiredTime"))
                 .sign(algorithm);
     }
@@ -146,14 +149,16 @@ public class JwtTokenUtil {
      */
     private static Map<String, Date> calculateExpiredIssues() {
         Map<String, Date> map = new HashMap<>(16);
-        // 获取当前时间
+
+        // 获取签发时间, 即当前时间
         Calendar calendar = Calendar.getInstance();
-        // 记录签发时间
-        Date now = calendar.getTime();
+        Date issueTime = calendar.getTime();
+
         // 计算过期时间
         calendar.add(Calendar.SECOND, JwtTokenUtil.expireTime);
+
         // 传入签发时间和过期时间返回
-        map.put("now", now);
+        map.put("issueTime", issueTime);
         map.put("expiredTime", calendar.getTime());
         return map;
     }

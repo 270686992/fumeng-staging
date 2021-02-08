@@ -14,9 +14,9 @@ import java.nio.file.Path;
  * Spring MVC 配置
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:41
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Configuration(proxyBeanMethods = false)

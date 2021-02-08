@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
  * 待处理文件信息
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 09:53
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Data

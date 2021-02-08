@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 项目启动入口
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 00:19
+ * @date 2020/9/22
  * @since JDK1.8
  */
 @SpringBootApplication

@@ -3,7 +3,7 @@ package cn.xilikeli.staging.common.exception;
 import cn.xilikeli.staging.common.configuration.CodeMessageConfiguration;
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
 import cn.xilikeli.staging.common.exception.http.HttpException;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.TypeMismatchException;
@@ -37,9 +37,9 @@ import java.util.Set;
  * 全局异常处理
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:53
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Slf4j
@@ -62,16 +62,20 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
-    public UnifyResponseVO<Object> handleException(Exception e) {
-        log.error("全局处理异常->未归类的异常(Exception), 详情: ", e);
+    public UnifyResponseVO<Object> handleException(HttpServletRequest request, Exception e) {
+        String method = request.getMethod();
+        String requestUrl = request.getRequestURI();
 
-        // 通过 code 码得到对应的提示信息
+        // 对于未知异常, 统一返回服务器未知错误错误码对应的错误信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.INTERNAL_SERVER_ERROR.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.INTERNAL_SERVER_ERROR.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.INTERNAL_SERVER_ERROR.getCode(), message, false);
+        log.error("全局异常处理===处理未知异常: code: {}, message: {}, request: {}, detail: {}",
+                CodeEnum.INTERNAL_SERVER_ERROR.getCode(), message, method + " " + requestUrl, e);
+
+        return UnifyResponseVO.failed(CodeEnum.INTERNAL_SERVER_ERROR.getCode(), message);
     }
 
     /**
@@ -85,16 +89,21 @@ public class GlobalExceptionAdvice {
     public ResponseEntity<UnifyResponseVO<Object>> handleHttpException(HttpServletRequest request, HttpException e) {
         String requestUrl = request.getRequestURI();
         String method = request.getMethod();
+        String message;
 
-        // 通过 code 码得到对应的提示信息
-        String message = CodeMessageConfiguration.getMessageByCode(e.getCode());
-        if (StringUtils.isBlank(message)) {
+        if (e.getDefaultMessageFlag()) {
+            message = CodeMessageConfiguration.getMessageByCode(e.getCode());
+            if (StringUtils.isBlank(message)) {
+                message = e.getMessage();
+            }
+        } else {
             message = e.getMessage();
         }
 
-        log.error("全局处理异常->Http 自定义异常(HttpException): code: {}, message: {}, request: {}, detail: ", e.getCode(), message, method + " " + requestUrl, e);
+        log.error("全局异常处理===处理 Http 异常: code: {}, message: {}, request: {}, detail: {}",
+                CodeEnum.INTERNAL_SERVER_ERROR.getCode(), message, method + " " + requestUrl, e);
 
-        UnifyResponseVO<Object> unifyResponseVO = new UnifyResponseVO<>(e.getCode(), message, false);
+        UnifyResponseVO<Object> unifyResponseVO = UnifyResponseVO.failed(e.getCode(), message);
 
         // 这里因为没用 Spring 的注解,所以需要 headers 来设置返回的类型
         HttpHeaders headers = new HttpHeaders();
@@ -111,7 +120,7 @@ public class GlobalExceptionAdvice {
     }
 
     /**
-     * 处理 MissingServletRequestParameterException
+     * 处理丢失参数异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -120,19 +129,18 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        log.error("全局处理异常-MissingServletRequestParameterException, 详情: ", e);
+        log.error("全局异常处理===处理丢失参数异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.MISSING_PARAMETER.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.MISSING_PARAMETER.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.MISSING_PARAMETER.getCode(), message, false);
+        return UnifyResponseVO.failed(CodeEnum.MISSING_PARAMETER.getCode(), message);
     }
 
     /**
-     * 处理 MethodArgumentTypeMismatchException
+     * 处理方法参数类型不匹配异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -141,15 +149,14 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
-        log.error("全局处理异常-MethodArgumentTypeMismatchException, 详情: ", e);
+        log.error("全局异常处理===处理方法参数类型不匹配异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.METHOD_ARGUMENT_TYPE_MISMATCH.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.METHOD_ARGUMENT_TYPE_MISMATCH.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.METHOD_ARGUMENT_TYPE_MISMATCH.getCode(), message, false);
+        return UnifyResponseVO.failed(CodeEnum.METHOD_ARGUMENT_TYPE_MISMATCH.getCode(), message);
     }
 
     /**
@@ -162,9 +169,9 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleServletException(ServletException e) {
-        log.error("全局处理异常-ServletException, 详情: ", e);
+        log.error("全局异常处理===处理 ServletException, 详情: ", e);
 
-        return new UnifyResponseVO<>(CodeEnum.FAIL.getCode(), e.getMessage(), false);
+        return UnifyResponseVO.failed(CodeEnum.FAIL.getCode(), e.getMessage());
     }
 
     /**
@@ -177,13 +184,13 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleTypeMismatchException(TypeMismatchException e) {
-        log.error("全局处理异常-TypeMismatchException: , 详情: ", e);
+        log.error("全局异常处理===处理 TypeMismatchException: , 详情: ", e);
 
-        return new UnifyResponseVO<>(CodeEnum.PARAMETER_ERROR.getCode(), e.getMessage(), false);
+        return UnifyResponseVO.failed(CodeEnum.PARAMETER_ERROR.getCode(), e.getMessage());
     }
 
     /**
-     * 处理 MaxUploadSizeExceededException
+     * 处理文件体积过大异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -192,19 +199,18 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.PAYLOAD_TOO_LARGE)
     @ResponseBody
     public UnifyResponseVO<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e) {
-        log.error("全局处理异常-MaxUploadSizeExceededException, 详情: ", e);
+        log.error("全局异常处理===处理文件体积过大异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.FILE_TOO_LARGE.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.FILE_TOO_LARGE.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.FILE_TOO_LARGE.getCode(), message + maxFileSize, false);
+        return UnifyResponseVO.failed(CodeEnum.FILE_TOO_LARGE.getCode(), message + maxFileSize);
     }
 
     /**
-     * 处理 NoHandlerFoundException
+     * 处理找不到 API 接口异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -213,20 +219,19 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     @ResponseBody
     public UnifyResponseVO<Object> handleNoHandlerFoundException(NoHandlerFoundException e) {
-        log.error("全局处理异常-NoHandlerFoundException, 详情: ", e);
+        log.error("全局异常处理===处理找不到 API 接口异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
-        String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.NOT_FOUND_ROUTE.getCode());
+        String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.NOT_FOUND_API_ROUTE.getCode());
         if (StringUtils.isBlank(message)) {
-            message = CodeEnum.NOT_FOUND_ROUTE.getZhDescription();
+            message = CodeEnum.NOT_FOUND_API_ROUTE.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.NOT_FOUND_ROUTE.getCode(), message, false);
+        return UnifyResponseVO.failed(CodeEnum.NOT_FOUND_API_ROUTE.getCode(), message);
     }
 
 
     /**
-     * 处理 handleHttpMessageNotReadableException
+     * 处理 Http 消息不可读异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -235,19 +240,18 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        log.error("全局处理异常-HttpMessageNotReadableException, 详情: ", e);
+        log.error("全局异常处理===处理 Http 消息不可读异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.REQUEST_BODY_CANNOT_EMPTY.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.REQUEST_BODY_CANNOT_EMPTY.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.REQUEST_BODY_CANNOT_EMPTY.getCode(), message, false);
+        return UnifyResponseVO.failed(CodeEnum.REQUEST_BODY_CANNOT_EMPTY.getCode(), message);
     }
 
     /**
-     * 处理 HttpMessageConversionException
+     * 处理 Http 信息转换错误异常
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -256,19 +260,19 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleHttpMessageConversionException(HttpMessageConversionException e) {
-        log.error("全局处理异常-HttpMessageConversionException, 详情: ", e);
+        log.error("全局异常处理===处理 Http 信息转换错误异常, 详情: ", e);
 
-        // 通过 code 码得到对应的提示信息
         String message = CodeMessageConfiguration.getMessageByCode(CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getCode());
         if (StringUtils.isBlank(message)) {
             message = CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getZhDescription();
         }
 
-        return new UnifyResponseVO<>(CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getCode(), message, false);
+        return UnifyResponseVO.failed(CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getCode(), message);
     }
 
     /**
-     * 处理 MethodArgumentNotValidException 参数校验异常
+     * 处理 DTO 字段参数校验异常
+     * 该异常处理用于处理 DTO 字段的参数校验
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -277,18 +281,19 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
     public UnifyResponseVO<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("全局处理异常-MethodArgumentNotValidException, 详情: ", e);
+        log.error("全局异常处理===处理 DTO 字段参数校验异常, 详情: ", e);
 
         // 获取错误信息列表
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         // 组合错误信息
         String errorMessage = this.formatAllErrorMessages(errors);
 
-        return new UnifyResponseVO<>(CodeEnum.PARAMETER_ERROR.getCode(), errorMessage, false);
+        return UnifyResponseVO.failed(CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getCode(), errorMessage);
     }
 
     /**
-     * 处理 ConstraintViolationException 参数校验异常
+     * 处理 url 查询参数校验异常
+     * 该异常处理用于处理接口 url 中的查询参数校验
      *
      * @param e 要处理的异常
      * @return 返回处理后的提示信息
@@ -297,14 +302,14 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
     public UnifyResponseVO<Object> handleConstraintViolationException(ConstraintViolationException e) {
-        log.error("全局处理异常-ConstraintViolationException, 详情: ", e);
+        log.error("全局异常处理===处理 url 查询参数校验异常, 详情: ", e);
 
         // 获取错误信息列表
         Set<ConstraintViolation<?>> errors = e.getConstraintViolations();
         // 组合错误信息
         String errorMessage = formatAllErrorMessages(errors);
 
-        return new UnifyResponseVO<>(CodeEnum.PARAMETER_ERROR.getCode(), errorMessage, false);
+        return UnifyResponseVO.failed(CodeEnum.HTTP_MESSAGE_CONVERSION_ERROR.getCode(), errorMessage);
     }
 
     /**

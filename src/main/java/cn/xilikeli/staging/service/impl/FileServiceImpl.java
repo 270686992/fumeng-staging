@@ -3,7 +3,7 @@ package cn.xilikeli.staging.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.xilikeli.staging.bo.FileBO;
 import cn.xilikeli.staging.common.constant.CommonConstant;
-import cn.xilikeli.staging.model.File;
+import cn.xilikeli.staging.model.FileDO;
 import cn.xilikeli.staging.module.file.FileConstant;
 import cn.xilikeli.staging.module.file.FileProperties;
 import cn.xilikeli.staging.module.file.Uploader;
@@ -22,9 +22,9 @@ import java.util.List;
  * 文件服务类实现类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:39
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Service
@@ -56,10 +56,10 @@ public class FileServiceImpl implements FileService {
         List<FileBO> res = new ArrayList<>();
 
         this.uploader.upload(fileMap, fileInfo -> {
-            File found = this.fileRepository.findOneByMd5(fileInfo.getMd5());
+            FileDO found = this.fileRepository.findOneByMd5(fileInfo.getMd5());
             // 数据库中不存在
             if (found == null) {
-                File fileModel = new File();
+                FileDO fileModel = new FileDO();
                 BeanUtil.copyProperties(fileInfo, fileModel);
                 this.fileRepository.save(fileModel);
                 res.add(transformModelToBo(fileModel, fileInfo.getKey()));
@@ -85,7 +85,7 @@ public class FileServiceImpl implements FileService {
      * @param key  文件 key, 上传时指定的
      * @return 返回转换后的文件信息 BO
      */
-    private FileBO transformModelToBo(File file, String key) {
+    private FileBO transformModelToBo(FileDO file, String key) {
         FileBO bo = new FileBO();
         BeanUtil.copyProperties(file, bo);
 

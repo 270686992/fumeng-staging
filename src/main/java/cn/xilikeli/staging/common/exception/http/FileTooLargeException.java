@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 文件过大异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:47
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Getter
@@ -31,6 +31,7 @@ public class FileTooLargeException extends HttpException {
 
     public FileTooLargeException() {
         super(CodeEnum.FILE_TOO_LARGE.getCode(), CodeEnum.FILE_TOO_LARGE.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public FileTooLargeException(String message) {
@@ -40,6 +41,7 @@ public class FileTooLargeException extends HttpException {
     public FileTooLargeException(Integer code) {
         super(code, CodeEnum.FILE_TOO_LARGE.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public FileTooLargeException(Integer code, String message) {

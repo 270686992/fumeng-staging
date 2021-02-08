@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.vo;
+package cn.xilikeli.staging.vo.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,9 +13,9 @@ import java.util.List;
  * 分页数据统一 VO
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:17
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Data

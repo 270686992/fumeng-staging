@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 请求过多异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class RequestLimitException extends HttpException {
 
     public RequestLimitException() {
         super(CodeEnum.REQUEST_LIMIT.getCode(), CodeEnum.REQUEST_LIMIT.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public RequestLimitException(String message) {
@@ -40,6 +41,7 @@ public class RequestLimitException extends HttpException {
     public RequestLimitException(Integer code) {
         super(code, CodeEnum.REQUEST_LIMIT.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public RequestLimitException(Integer code, String message) {

@@ -14,9 +14,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * 比较两个属性是否相等的自定义校验注解
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:53
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Documented

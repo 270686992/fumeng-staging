@@ -6,9 +6,9 @@ package cn.xilikeli.staging.module.log;
  * 参考自 lin-cms-springboot: <a>https://github.com/TaleLin/lin-cms-spring-boot</a>
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 01:59
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class MdcAccessConstant {

@@ -1,7 +1,7 @@
 package cn.xilikeli.staging.common.util;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
+import cn.xilikeli.staging.vo.response.UnifyResponseVO;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
  * 统一 API 响应结果生成工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:32
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @SuppressWarnings("all")

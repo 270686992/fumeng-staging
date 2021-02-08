@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 字段重复异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class DuplicatedException extends HttpException {
 
     public DuplicatedException() {
         super(CodeEnum.DUPLICATED.getCode(), CodeEnum.DUPLICATED.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public DuplicatedException(String message) {
@@ -40,6 +41,7 @@ public class DuplicatedException extends HttpException {
     public DuplicatedException(Integer code) {
         super(code, CodeEnum.DUPLICATED.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public DuplicatedException(Integer code, String message) {

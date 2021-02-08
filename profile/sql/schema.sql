@@ -41,10 +41,56 @@ CREATE TABLE `file`
     `create_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
     `update_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
     `delete_time` DATETIME(3) DEFAULT NULL COMMENT '删除时间',
-    PRIMARY KEY (id),
-    UNIQUE KEY md5_del_idx (md5, delete_time)
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_md5_del` (`md5`, `delete_time`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci
   COMMENT = '文件表';
+
+-- ----------------------------
+-- 用户基本信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE IF NOT EXISTS `account`
+(
+    `id`          BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户 ID, 自增主键',
+    `email`       VARCHAR(50) NOT NULL DEFAULT '' COMMENT '用户邮箱',
+    `mobile`      VARCHAR(30) NOT NULL DEFAULT '' COMMENT '用户手机号',
+    `nickname`    VARCHAR(20) NOT NULL DEFAULT '' COMMENT '用户昵称',
+  	`avatar`      VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户头像 url',
+    `status`      TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '用户状态: 1-正常, 0-冻结',
+    `sex`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '2' COMMENT '用户性别, 1-男, 0-女, 2-保密',
+    `birthday`    DATETIME(3) NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '用户生日',
+    `create_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `update_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
+    `delete_time` DATETIME(3) DEFAULT NULL COMMENT '删除时间',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  COMMENT = '用户基本信息表';
+
+-- ----------------------------
+-- 用户认证信息表
+-- ----------------------------
+DROP TABLE IF EXISTS `account_identity`;
+CREATE TABLE IF NOT EXISTS `account_identity`
+(
+    `id`            BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户认证信息 ID, 自增主键',
+    `account_id`    BIGINT(20) UNSIGNED NOT NULL DEFAULT '0' COMMENT '所属用户 ID',
+    `identity_type` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '登录类型(手机号, 邮箱, 用户名或第三方应用名称(微信, 微博, QQ 等)',
+    `identifier`    VARCHAR(100) NOT NULL DEFAULT '' COMMENT '标识(手机号, 邮箱, 用户名或第三方应用的唯一标识)',
+    `credential`    VARCHAR(100) NOT NULL DEFAULT '' COMMENT '密码凭证(站内的保存密码, 站外的不保存或保存 token)',
+    `create_time`   DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+    `update_time`   DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
+    `delete_time`   DATETIME(3) DEFAULT NULL COMMENT '删除时间',
+    PRIMARY KEY (`id`),
+    KEY `idx_account_id_identity_type_del` (`account_id`, `identity_type`, `delete_time`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  COMMENT = '用户认证信息表';

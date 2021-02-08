@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.vo;
+package cn.xilikeli.staging.vo.response;
 
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
 import cn.xilikeli.staging.common.util.ResponseUtil;
@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
  * 删除资源成功的响应结果
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 14:51
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class DeletedResponseVO<T> extends UnifyResponseVO<T> {

@@ -7,9 +7,9 @@ import org.junit.Test;
  * 公用测试类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/22 - 00:37
+ * @date 2020/9/22
  * @since JDK1.8
  */
 public class CommonTest {

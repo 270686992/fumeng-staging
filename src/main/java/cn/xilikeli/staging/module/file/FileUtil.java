@@ -13,9 +13,9 @@ import java.nio.file.Path;
  * 文件工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 10:34
+ * @date 2020/9/28
  * @since JDK1.8
  */
 public class FileUtil {

@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
  * 统一分页参数 BO
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:13
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Data

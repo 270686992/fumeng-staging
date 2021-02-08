@@ -1,9 +1,8 @@
 package cn.xilikeli.staging.controller.v1;
 
 import cn.xilikeli.staging.bo.FileBO;
-import cn.xilikeli.staging.common.util.ResponseUtil;
+import cn.xilikeli.staging.common.interceptor.ScopeLevel;
 import cn.xilikeli.staging.service.FileService;
-import cn.xilikeli.staging.vo.UnifyResponseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,9 +23,9 @@ import java.util.List;
  * 文件上传 API 接口控制器
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:25
+ * @date 2020/9/28
  * @since JDK1.8
  */
 @Validated
@@ -48,15 +47,15 @@ public class FileController {
      * @param multipartHttpServletRequest 携带文件的 request
      * @return 文件信息
      */
+    @ScopeLevel
     @PostMapping
     @ApiOperation(value = "文件上传接口", notes = "文件上传接口", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "上传的文件", dataType = "MultipartFile", required = true)
     })
-    public UnifyResponseVO<List<FileBO>> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
+    public List<FileBO> upload(MultipartHttpServletRequest multipartHttpServletRequest) {
         MultiValueMap<String, MultipartFile> fileMap = multipartHttpServletRequest.getMultiFileMap();
-        List<FileBO> uploadFileList = this.fileService.upload(fileMap);
-        return ResponseUtil.generateUnifyResponseVO(uploadFileList);
+        return this.fileService.upload(fileMap);
     }
 
 }

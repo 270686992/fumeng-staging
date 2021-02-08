@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * 令牌过期异常
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
  * @date 2021/1/8
  * @since JDK1.8
@@ -31,6 +31,7 @@ public class TokenExpiredException extends HttpException {
 
     public TokenExpiredException() {
         super(CodeEnum.TOKEN_EXPIRED.getCode(), CodeEnum.TOKEN_EXPIRED.getDescription());
+        super.defaultMessageFlag = true;
     }
 
     public TokenExpiredException(String message) {
@@ -40,6 +41,7 @@ public class TokenExpiredException extends HttpException {
     public TokenExpiredException(Integer code) {
         super(code, CodeEnum.TOKEN_EXPIRED.getDescription());
         this.code = code;
+        super.defaultMessageFlag = true;
     }
 
     public TokenExpiredException(Integer code, String message) {

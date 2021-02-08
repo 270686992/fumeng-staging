@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.vo;
+package cn.xilikeli.staging.vo.book;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
  * 图书示例 VO
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 21:00
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Data

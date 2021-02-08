@@ -2,13 +2,16 @@ package cn.xilikeli.staging.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -17,17 +20,24 @@ import static javax.persistence.GenerationType.IDENTITY;
  * 文件信息实体
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/28 - 20:31
+ * @date 2020/9/28
  * @since JDK1.8
  */
-@Entity
 @Data
+@Entity
+@Table(name = "file")
+@Builder
+@Accessors(chain = true)
+@DynamicInsert()
+@DynamicUpdate()
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "delete_time is null")
 @ApiModel(value = "文件信息实体", description = "文件信息实体")
-public class File extends BaseEntity {
+public class FileDO extends BaseDO {
 
     private static final long serialVersionUID = -7988788433514112555L;
 

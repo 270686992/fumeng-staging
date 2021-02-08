@@ -13,9 +13,9 @@ import java.net.UnknownHostException;
  * 获取用户终端 IP 地址的工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:09
+ * @date 2020/9/24
  * @since JDK1.8
  */
 @Component

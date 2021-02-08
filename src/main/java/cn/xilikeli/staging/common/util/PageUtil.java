@@ -7,9 +7,9 @@ import cn.xilikeli.staging.bo.PageCounterBO;
  * 分页工具类
  * </p>
  *
- * @author 踏雪彡寻梅
+ * @author txxunmei
  * @version 1.0
- * @date 2020/9/24 - 16:12
+ * @date 2020/9/24
  * @since JDK1.8
  */
 public class PageUtil {
