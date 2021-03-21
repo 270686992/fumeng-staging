@@ -57,6 +57,8 @@ public class AccountIdentityDO extends BaseDO {
 
     /**
      * 登录类型(手机号, 邮箱, 用户名或第三方应用名称(微信, 微博, QQ 等)
+     *
+     * @see cn.xilikeli.staging.common.constant.IdentityTypeConstant
      */
     @ApiModelProperty(value = "登录类型(手机号, 邮箱, 用户名或第三方应用名称(微信, 微博, QQ 等)")
     private String identityType;

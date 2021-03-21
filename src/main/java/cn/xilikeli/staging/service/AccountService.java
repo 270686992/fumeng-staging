@@ -4,8 +4,7 @@ import cn.xilikeli.staging.dto.account.AccountDTO;
 import cn.xilikeli.staging.dto.account.LoginDTO;
 import cn.xilikeli.staging.dto.account.RegisterDTO;
 import cn.xilikeli.staging.vo.account.LoginResultVO;
-
-import java.util.Optional;
+import cn.xilikeli.staging.vo.account.RegisterResultVO;
 
 /**
  * <p>
@@ -36,20 +35,29 @@ public interface AccountService {
     boolean checkAccountExistByMobile(String mobile);
 
     /**
-     * 添加用户
+     * 根据用户 ID 和登录类型获取用户信息
      *
-     * @param registerDTO 用户注册信息 DTO
-     * @return 返回添加的用户的 ID
-     */
-    Optional<Long> createAccount(RegisterDTO registerDTO);
-
-    /**
-     * 根据用户 ID 获取用户信息
-     *
-     * @param accountId 用户 ID
+     * @param accountId    用户 ID
+     * @param identityType 登录类型(手机号, 邮箱, 用户名或第三方应用名称(微信, 微博, QQ 等)
      * @return 返回相应的用户信息
      */
-    AccountDTO getAccountInfoById(Long accountId);
+    AccountDTO getAccountInfoByIdAndIdentityType(Long accountId, String identityType);
+
+    /**
+     * 通过用户名和密码的方式进行注册
+     *
+     * @param registerDTO 用户注册信息 DTO
+     * @return 注册成功返回成功的响应结果, 否则返回失败的响应结果
+     */
+    RegisterResultVO registerByUsernameAndPassword(RegisterDTO registerDTO);
+
+    /**
+     * 通过微信小程序的方式进行注册
+     *
+     * @param registerDTO 用户注册信息 DTO
+     * @return 注册成功返回成功的响应结果, 否则返回失败的响应结果
+     */
+    RegisterResultVO registerByWeChatApplets(RegisterDTO registerDTO);
 
     /**
      * 通过用户名和密码的方式进行登录
@@ -58,5 +66,13 @@ public interface AccountService {
      * @return 登录成功返回成功的响应结果, 否则返回失败的响应结果
      */
     LoginResultVO loginByUsernameAndPassword(LoginDTO loginDTO);
+
+    /**
+     * 通过微信小程序的方式进行登录
+     *
+     * @param loginDTO 用户登录信息 DTO
+     * @return 登录成功返回成功的响应结果, 否则返回失败的响应结果
+     */
+    LoginResultVO loginByWeChatApplets(LoginDTO loginDTO);
 
 }

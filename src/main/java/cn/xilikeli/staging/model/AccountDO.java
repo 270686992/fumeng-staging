@@ -76,12 +76,16 @@ public class AccountDO extends BaseDO {
 
     /**
      * 用户状态: 1-正常, 0-冻结
+     *
+     * @see cn.xilikeli.staging.common.enumeration.AccountStatusEnum
      */
     @ApiModelProperty(value = "用户状态: 1-正常, 0-冻结")
     private Integer status;
 
     /**
-     * 用户性别, 1-男, 0-女, 2-保密
+     * 用户性别, 0-男, 1-女, 2-保密
+     *
+     * @see cn.xilikeli.staging.common.enumeration.SexEnum
      */
     @ApiModelProperty(value = "用户性别, 1-男, 0-女, 2-保密")
     private Integer sex;

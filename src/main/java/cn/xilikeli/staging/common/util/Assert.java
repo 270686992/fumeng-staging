@@ -1,5 +1,6 @@
 package cn.xilikeli.staging.common.util;
 
+import cn.xilikeli.staging.common.exception.http.FailedException;
 import cn.xilikeli.staging.common.exception.http.NotFoundException;
 import cn.xilikeli.staging.common.exception.http.ParameterException;
 import org.springframework.util.CollectionUtils;
@@ -43,6 +44,12 @@ public class Assert {
     public static void checkArgument(boolean expression, Integer code) {
         if (expression) {
             throw new ParameterException(code);
+        }
+    }
+
+    public static void checkFailed(boolean expression, Integer code) {
+        if (expression) {
+            throw new FailedException(code);
         }
     }
 

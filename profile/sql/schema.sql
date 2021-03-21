@@ -42,7 +42,7 @@ CREATE TABLE `file`
     `update_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
     `delete_time` DATETIME(3) DEFAULT NULL COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `idx_md5_del` (`md5`, `delete_time`)
+    UNIQUE KEY `idx_md5` (`md5`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `account`
     `nickname`    VARCHAR(20) NOT NULL DEFAULT '' COMMENT '用户昵称',
   	`avatar`      VARCHAR(255) NOT NULL DEFAULT '' COMMENT '用户头像 url',
     `status`      TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '用户状态: 1-正常, 0-冻结',
-    `sex`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '2' COMMENT '用户性别, 1-男, 0-女, 2-保密',
+    `sex`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '2' COMMENT '用户性别, 0-男, 1-女, 2-保密',
     `birthday`    DATETIME(3) NOT NULL DEFAULT '1970-01-01 00:00:00' COMMENT '用户生日',
     `create_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
     `update_time` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `account_identity`
     `update_time`   DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
     `delete_time`   DATETIME(3) DEFAULT NULL COMMENT '删除时间',
     PRIMARY KEY (`id`),
-    KEY `idx_account_id_identity_type_del` (`account_id`, `identity_type`, `delete_time`)
+    KEY `idx_account_id` (`account_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4

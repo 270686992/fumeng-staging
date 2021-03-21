@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户注册结果
+ * 用户注册结果 VO
  * </p>
  *
  * @author txxunmei
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "用户注册结果", description = "用户注册结果")
+@ApiModel(value = "用户注册结果 VO", description = "用户注册结果 VO")
 public class RegisterResultVO {
 
     /**

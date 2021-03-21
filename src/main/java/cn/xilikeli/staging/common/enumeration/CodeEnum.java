@@ -1,10 +1,13 @@
 package cn.xilikeli.staging.common.enumeration;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * <p>
- * 通用消息码枚举类
+ * 通用消息码枚举
  * </p>
  *
  * @author txxunmei
@@ -157,7 +160,12 @@ public enum CodeEnum {
     /**
      * 读取文件数据失败消息码
      */
-    READ_FILE_FAILED(10022, "Failed To Read File Data", "读取文件数据失败", false);
+    READ_FILE_FAILED(10022, "Failed To Read File Data", "读取文件数据失败", false),
+
+    /**
+     * 入参不可为空消息码
+     */
+    PARAMETER_NOT_NULL(10023, "Parameter Can Be Not Null", "入参不可为空", false);
 
     /**
      * 消息码
@@ -187,32 +195,48 @@ public enum CodeEnum {
     }
 
     public Integer getCode() {
-        return code;
+        return this.code;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public String getZhDescription() {
-        return zhDescription;
+        return this.zhDescription;
     }
 
     public Boolean getSuccess() {
-        return success;
+        return this.success;
     }
 
-    /**
-     * 将消息码 code 转换为对应的枚举类型
-     *
-     * @param code 消息码
-     * @return 转换成功返回消息码 code 对应的枚举类型, 转换失败返回未定义枚举
-     */
     public static CodeEnum toEnum(Integer code) {
         return Stream.of(CodeEnum.values())
                 .filter(errorCodeEnum -> errorCodeEnum.code.equals(code))
                 .findAny()
                 .orElse(UNDEFINED);
+    }
+
+    public static String getDescriptionByCode(Integer code) {
+        return Stream.of(CodeEnum.values())
+                .filter(codeEnum -> codeEnum.code.equals(code))
+                .map(CodeEnum::getDescription)
+                .findAny()
+                .orElse("");
+    }
+
+    public static String getZhDescriptionByCode(Integer code) {
+        return Stream.of(CodeEnum.values())
+                .filter(codeEnum -> codeEnum.code.equals(code))
+                .map(CodeEnum::getZhDescription)
+                .findAny()
+                .orElse("");
+    }
+
+    public static List<CodeEnum> getAllEffectiveEnum() {
+        return Arrays.stream(CodeEnum.values())
+                .filter(codeEnum -> codeEnum.code > UNDEFINED.code)
+                .collect(Collectors.toList());
     }
 
 }

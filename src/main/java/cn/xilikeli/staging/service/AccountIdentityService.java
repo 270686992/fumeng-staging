@@ -2,6 +2,8 @@ package cn.xilikeli.staging.service;
 
 import cn.xilikeli.staging.model.AccountIdentityDO;
 
+import java.util.Optional;
+
 /**
  * <p>
  * 用户认证信息服务类
@@ -49,6 +51,14 @@ public interface AccountIdentityService {
     void createUsernamePasswordIdentity(Long accountId, String username, String password);
 
     /**
+     * 新建用户认证信息 (微信小程序)
+     *
+     * @param accountId 用户 ID
+     * @param openid    微信小程序 openid
+     */
+    void createWeChatAppletsIdentity(Long accountId, String openid);
+
+    /**
      * 验证用户认证信息 (USERNAME_PASSWORD)
      *
      * @param accountId 用户id
@@ -64,7 +74,7 @@ public interface AccountIdentityService {
      * @param identifier 标识(手机号, 邮箱, 用户名或第三方应用的唯一标识)
      * @return 返回相应的用户认证信息
      */
-    AccountIdentityDO getIdentityByIdentifier(String identifier);
+    Optional<AccountIdentityDO> getIdentityByIdentifier(String identifier);
 
     /**
      * 根据用户 ID 和登录类型获取用户认证信息

@@ -26,6 +26,8 @@ public class EnumValueValidator implements ConstraintValidator<EnumValue, Object
      */
     private Class<?> cls;
 
+    private static final Integer UNDEFINED = -1;
+
     @Override
     public void initialize(EnumValue constraintAnnotation) {
         cls = constraintAnnotation.target();
@@ -46,10 +48,10 @@ public class EnumValueValidator implements ConstraintValidator<EnumValue, Object
 
         try {
             Object[] objs = cls.getEnumConstants();
-            Method method = cls.getMethod("getValue");
+            Method method = cls.getMethod("getIndex");
             for (Object obj : objs) {
                 Object val = method.invoke(obj);
-                if (val.equals(value)) {
+                if (!val.equals(UNDEFINED) && val.equals(value)) {
                     return true;
                 }
             }

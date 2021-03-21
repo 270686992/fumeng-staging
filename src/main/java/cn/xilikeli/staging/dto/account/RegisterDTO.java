@@ -1,6 +1,7 @@
 package cn.xilikeli.staging.dto.account;
 
-import cn.xilikeli.staging.dto.validator.EqualField;
+import cn.xilikeli.staging.common.enumeration.RegisterTypeEnum;
+import cn.xilikeli.staging.dto.validator.EnumValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,8 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -29,56 +30,38 @@ import javax.validation.constraints.Pattern;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualField(srcField = "password", dstField = "confirmPassword", message = "{password.equal-field}")
 @ApiModel(value = "用户注册信息 DTO", description = "用户注册信息 DTO")
 public class RegisterDTO {
 
     /**
-     * 用户名
+     * 账号, 如: 用户名、微信小程序 openid 等等...
      */
-    @NotBlank(message = "{username.not-blank}")
-    @Length(min = 4, max = 20, message = "{username.length}")
-    @ApiModelProperty(value = "用户名", example = "guest", required = true)
-    private String username;
-
-    /**
-     * 用户昵称
-     */
-    @NotBlank(message = "{nickname.not-blank}")
-    @Length(min = 2, max = 20, message = "{nickname.length}")
-    @ApiModelProperty(value = "用户昵称", example = "但为君故", required = true)
-    private String nickname;
-
-    /**
-     * 用户邮箱
-     */
-    @Email(message = "{email}")
-    @NotBlank(message = "{email.not-blank}")
-    @Length(min = 3, max = 50, message = "{email.length}")
-    @ApiModelProperty(value = "用户邮箱", example = "123456@163.com", required = true)
-    private String email;
-
-    /**
-     * 用户手机号
-     */
-    @NotBlank(message = "{mobile.not-blank}")
-    @Pattern(regexp = "^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$", message = "{mobile}")
-    @ApiModelProperty(value = "用户手机号", example = "18211112222", required = true, dataType = "string")
-    private String mobile;
+    @NotBlank(message = "{account.not-blank}")
+    @Length(min = 4, max = 40, message = "{account.length}")
+    @ApiModelProperty(value = "账号, 如: 用户名、微信小程序 openid 等等...", example = "guest", required = true)
+    private String account;
 
     /**
      * 密码
      */
-    @NotBlank(message = "{password.new.not-blank}")
     @Pattern(regexp = "^[A-Za-z0-9_]{6,22}$", message = "{password.new.pattern}")
-    @ApiModelProperty(value = "密码", example = "123456", required = true, dataType = "string")
+    @ApiModelProperty(value = "密码", example = "123456")
     private String password;
 
     /**
      * 确认密码
      */
-    @NotBlank(message = "{password.confirm.not-blank}")
-    @ApiModelProperty(name = "confirm_password", value = "确认密码", example = "123456", required = true, dataType = "string")
+    @ApiModelProperty(name = "confirm_password", value = "确认密码", example = "123456")
     private String confirmPassword;
+
+    /**
+     * 注册类型
+     *
+     * @see cn.xilikeli.staging.common.enumeration.RegisterTypeEnum
+     */
+    @NotNull(message = "{register-type.not-null}")
+    @EnumValue(target = RegisterTypeEnum.class, message = "{register-type.value}")
+    @ApiModelProperty(value = "注册类型: 0(用户名、密码注册), 1(微信小程序注册), 2(邮箱注册), 3(手机号注册)", required = true, example = "0")
+    private Integer registerType;
 
 }
