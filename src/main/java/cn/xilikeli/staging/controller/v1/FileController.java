@@ -49,7 +49,7 @@ public class FileController {
      */
     @ScopeLevel
     @PostMapping
-    @ApiOperation(value = "文件上传接口", notes = "文件上传接口", httpMethod = "POST")
+    @ApiOperation(value = "文件上传接口", notes = "文件上传接口, 支持多文件上传", httpMethod = "POST")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "file", value = "上传的文件", dataType = "MultipartFile", required = true)
     })

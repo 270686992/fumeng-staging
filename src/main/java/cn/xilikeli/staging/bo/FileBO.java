@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @ApiModel(value = "文件信息 BO", description = "文件信息 BO")
 public class FileBO {
+
     /**
      * 文件 ID
      */
@@ -46,4 +47,5 @@ public class FileBO {
      */
     @ApiModelProperty(value = "文件 URL")
     private String url;
+
 }

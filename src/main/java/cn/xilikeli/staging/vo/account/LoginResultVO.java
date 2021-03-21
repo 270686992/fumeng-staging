@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 用户登录结果
+ * 用户登录结果 VO
  * </p>
  *
  * @author txxunmei
@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value = "用户登录结果", description = "用户登录结果")
+@ApiModel(value = "用户登录结果 VO", description = "用户登录结果 VO")
 public class LoginResultVO extends AccountDTO {
 
     /**

@@ -119,10 +119,11 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
     private void setToThreadLocal(Map<String, Claim> tokenInfo) {
         Long accountId = tokenInfo.get(JwtTokenUtil.ACCOUNT_ID_KEY).asLong();
         Integer scopeLevel = tokenInfo.get(JwtTokenUtil.SCOPE_LEVEL_KEY).asInt();
+        String identityType = tokenInfo.get(JwtTokenUtil.IDENTITY_TYPE_KEY).asString();
 
         AccountDTO accountDTO = null;
         try {
-            accountDTO = this.accountService.getAccountInfoById(accountId);
+            accountDTO = this.accountService.getAccountInfoByIdAndIdentityType(accountId, identityType);
         } catch (NotFoundException e) {
             throw new AuthorizationException(CodeEnum.UN_AUTHORIZATION.getCode());
         }

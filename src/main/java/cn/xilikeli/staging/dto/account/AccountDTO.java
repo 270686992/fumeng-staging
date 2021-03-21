@@ -42,11 +42,11 @@ public class AccountDTO {
     private Long id;
 
     /**
-     * 用户名
+     * 用户账号
      */
-    @Length(min = 4, max = 20, message = "{username.length}")
-    @ApiModelProperty(value = "用户名", example = "guest")
-    private String username;
+    @Length(min = 4, max = 40, message = "{account.length}")
+    @ApiModelProperty(value = "用户账号", example = "guest")
+    private String account;
 
     /**
      * 用户邮箱
@@ -78,13 +78,17 @@ public class AccountDTO {
 
     /**
      * 用户状态: 1-正常, 0-冻结
+     *
+     * @see cn.xilikeli.staging.common.enumeration.AccountStatusEnum
      */
     @EnumValue(target = AccountStatusEnum.class, message = "{account.status}")
     @ApiModelProperty(value = "用户状态: 1-正常, 0-冻结", example = "1")
     private Integer status;
 
     /**
-     * 用户性别, 1-男, 0-女, 2-保密
+     * 用户性别, 0-男, 1-女, 2-保密
+     *
+     * @see cn.xilikeli.staging.common.enumeration.SexEnum
      */
     @EnumValue(target = AccountStatusEnum.class, message = "{sex}")
     @ApiModelProperty(value = "用户性别, 1-男, 0-女, 2-保密", example = "1")

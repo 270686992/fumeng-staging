@@ -2,7 +2,7 @@ package cn.xilikeli.staging.common.constant;
 
 /**
  * <p>
- * 公用常量类
+ * 公用常量
  * </p>
  *
  * @author txxunmei
@@ -10,12 +10,12 @@ package cn.xilikeli.staging.common.constant;
  * @date 2020/9/24
  * @since JDK1.8
  */
-public class CommonConstant {
+public interface CommonConstant {
 
-    public static final String NULL = "null";
+    String NULL = "null";
 
-    public static final String OS_NAME_PROPERTY = "os.name";
+    String OS_NAME_PROPERTY = "os.name";
 
-    public static final String WINDOWS = "WINDOWS";
+    String WINDOWS = "WINDOWS";
 
 }

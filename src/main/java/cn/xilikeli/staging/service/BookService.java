@@ -21,7 +21,7 @@ public interface BookService {
     /**
      * 添加一本图书
      *
-     * @param bookDTO 图书 DTO
+     * @param bookDTO 图书信息 DTO
      */
     void createBook(BookDTO bookDTO);
 
@@ -37,7 +37,7 @@ public interface BookService {
      * 根据图书 ID 更新该图书的信息
      *
      * @param bookId  图书 ID
-     * @param bookDTO 图书 DTO
+     * @param bookDTO 图书信息 DTO
      */
     void updateBookById(Long bookId, BookDTO bookDTO);
 

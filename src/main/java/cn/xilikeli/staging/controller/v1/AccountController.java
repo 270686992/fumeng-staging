@@ -1,8 +1,9 @@
 package cn.xilikeli.staging.controller.v1;
 
-import cn.xilikeli.staging.common.constant.BusinessCodeConstant;
+import cn.xilikeli.staging.common.LocalUser;
+import cn.xilikeli.staging.common.constant.business.AccountCodeConstant;
 import cn.xilikeli.staging.common.enumeration.LoginTypeEnum;
-import cn.xilikeli.staging.common.exception.http.FailedException;
+import cn.xilikeli.staging.common.enumeration.RegisterTypeEnum;
 import cn.xilikeli.staging.common.exception.http.ParameterException;
 import cn.xilikeli.staging.common.interceptor.ScopeLevel;
 import cn.xilikeli.staging.common.util.JwtTokenUtil;
@@ -16,12 +17,10 @@ import cn.xilikeli.staging.vo.account.RegisterResultVO;
 import cn.xilikeli.staging.vo.response.CreatedResponseVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Positive;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,22 +55,23 @@ public class AccountController {
      */
     @PostMapping("/register")
     @ApiOperation(value = "用户注册接口", notes = "注册一个用户", httpMethod = "POST")
-    public CreatedResponseVO<RegisterResultVO> register(@RequestBody
-                                                        @Validated RegisterDTO registerDTO) {
-        Long accountId = this.accountService
-                .createAccount(registerDTO)
-                .orElseThrow(
-                        () -> new FailedException(BusinessCodeConstant.REGISTER_FAILED)
-                );
+    public CreatedResponseVO<RegisterResultVO> register(
+            @Validated
+            @RequestBody RegisterDTO registerDTO) {
+        RegisterResultVO registerResultVO;
 
-        String token = JwtTokenUtil.makeToken(accountId);
+        switch (RegisterTypeEnum.toEnum(registerDTO.getRegisterType())) {
+            case USERNAME_PASSWORD_REGISTER:
+                registerResultVO = this.accountService.registerByUsernameAndPassword(registerDTO);
+                break;
+            case WE_CHAT_APPLETS_REGISTER:
+                registerResultVO = this.accountService.registerByWeChatApplets(registerDTO);
+                break;
+            default:
+                throw new ParameterException(AccountCodeConstant.INVALID_REGISTER_TYPE);
+        }
 
-        RegisterResultVO registerResultVO = RegisterResultVO.builder()
-                .accountId(accountId)
-                .token(token)
-                .build();
-
-        return new CreatedResponseVO<>(BusinessCodeConstant.REGISTER_SUCCESS, registerResultVO);
+        return new CreatedResponseVO<>(AccountCodeConstant.REGISTER_SUCCESS, registerResultVO);
     }
 
     /**
@@ -82,38 +82,33 @@ public class AccountController {
      */
     @PostMapping("/login")
     @ApiOperation(value = "用户登录接口", notes = "用户登录", httpMethod = "POST")
-    public LoginResultVO login(@RequestBody
-                               @Validated LoginDTO loginDTO) {
+    public LoginResultVO login(
+            @Validated
+            @RequestBody LoginDTO loginDTO) {
         LoginResultVO loginResultVO = new LoginResultVO();
 
         switch (LoginTypeEnum.toEnum(loginDTO.getLoginType())) {
-            case USERNAME_PASSWORD_IDENTITY:
+            case USERNAME_PASSWORD_LOGIN:
                 loginResultVO = this.accountService.loginByUsernameAndPassword(loginDTO);
                 break;
-            case WX_IDENTITY:
-                // TODO 微信登录, 待扩展
-                break;
-            case EMAIL_IDENTITY:
-                // TODO 邮箱登录, 待扩展
-                break;
-            case MOBILE_IDENTITY:
-                // TODO 手机号登录, 待扩展
+            case WE_CHAT_APPLETS_LOGIN:
+                loginResultVO = this.accountService.loginByWeChatApplets(loginDTO);
                 break;
             default:
-                throw new ParameterException(BusinessCodeConstant.INVALID_LOGIN_TYPE);
+                throw new ParameterException(AccountCodeConstant.INVALID_LOGIN_TYPE);
         }
 
         return loginResultVO;
     }
 
     /**
-     * 校验前端传来的 token 令牌信息是否合法
+     * 校验 token 令牌信息是否合法
      *
      * @param tokenDTO token 令牌信息 DTO
      * @return 返回相应的校验结果
      */
     @PostMapping("/token/verify")
-    @ApiOperation(value = "校验 token 令牌信息接口", notes = "校验前端传来的 token 令牌信息是否合法", httpMethod = "POST")
+    @ApiOperation(value = "校验 token 令牌信息接口", notes = "校验 token 令牌信息是否合法", httpMethod = "POST")
     public Map<String, Boolean> verify(@RequestBody TokenDTO tokenDTO) {
         Map<String, Boolean> map = new HashMap<>(16);
         Boolean valid = JwtTokenUtil.verifyToken(tokenDTO.getToken());
@@ -122,19 +117,15 @@ public class AccountController {
     }
 
     /**
-     * 根据用户 ID 获取相应用户的信息
+     * 获取当前登录用户的信息
      *
-     * @param accountId 用户 ID
-     * @return 返回获取的用户的信息
+     * @return 返回当前登录用户的信息
      */
     @ScopeLevel
-    @GetMapping("/{id}")
-    @ApiOperation(value = "获取用户信息接口", notes = "根据用户 ID 获取相应用户的信息", httpMethod = "GET")
-    public AccountDTO getBookById(@PathVariable(name = "id")
-                                  @Positive(message = "{id.positive}")
-                                  @ApiParam(name = "id", value = "用户 ID", required = true, example = "1") Long accountId) {
-        return this.accountService.getAccountInfoById(accountId);
+    @GetMapping("/info")
+    @ApiOperation(value = "获取当前登录用户信息接口", notes = "获取当前登录用户的信息", httpMethod = "GET")
+    public AccountDTO getCurrentLoginAccountInfo() {
+        return LocalUser.getLocalUser();
     }
-
 
 }
