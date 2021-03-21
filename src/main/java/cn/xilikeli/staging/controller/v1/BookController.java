@@ -1,6 +1,6 @@
 package cn.xilikeli.staging.controller.v1;
 
-import cn.xilikeli.staging.common.constant.BusinessCodeConstant;
+import cn.xilikeli.staging.common.constant.business.BookCodeConstant;
 import cn.xilikeli.staging.common.interceptor.ScopeLevel;
 import cn.xilikeli.staging.dto.book.BookDTO;
 import cn.xilikeli.staging.model.BookDO;
@@ -47,16 +47,17 @@ public class BookController {
     /**
      * 添加一本图书
      *
-     * @param bookDTO 图书 DTO
+     * @param bookDTO 图书信息 DTO
      * @return 添加成功返回成功的响应结果, 否则返回失败的响应结果
      */
     @ScopeLevel
     @PostMapping("")
     @ApiOperation(value = "添加图书接口", notes = "添加一本图书", httpMethod = "POST")
-    public CreatedResponseVO<Object> createBook(@RequestBody
-                                                @Validated BookDTO bookDTO) {
+    public CreatedResponseVO<Object> createBook(
+            @Validated
+            @RequestBody BookDTO bookDTO) {
         this.bookService.createBook(bookDTO);
-        return new CreatedResponseVO<>(BusinessCodeConstant.CREATE_BOOK_SUCCESS);
+        return new CreatedResponseVO<>(BookCodeConstant.CREATE_BOOK_SUCCESS);
     }
 
     /**
@@ -68,9 +69,10 @@ public class BookController {
     @ScopeLevel
     @GetMapping("/{id}")
     @ApiOperation(value = "查看图书详情接口", notes = "根据图书 ID 获取相应图书的信息", httpMethod = "GET")
-    public BookDO getBookById(@PathVariable(name = "id")
-                              @Positive(message = "{id.positive}")
-                              @ApiParam(name = "id", value = "图书 ID", required = true, example = "1") Long bookId) {
+    public BookDO getBookById(
+            @ApiParam(name = "id", value = "图书 ID", required = true, example = "1")
+            @Positive(message = "{id.positive}")
+            @PathVariable(name = "id") Long bookId) {
         return this.bookService.getBookById(bookId);
     }
 
@@ -78,19 +80,20 @@ public class BookController {
      * 根据图书 ID 更新该图书的信息
      *
      * @param bookId  图书 ID
-     * @param bookDTO 图书 DTO
+     * @param bookDTO 图书信息 DTO
      * @return 更新成功返回成功的响应结果, 否则返回失败的响应结果
      */
     @ScopeLevel
     @PutMapping("/{id}")
     @ApiOperation(value = "更新图书接口", notes = "根据图书 ID 更新该图书的信息", httpMethod = "PUT")
-    public UpdatedResponseVO<Object> updateBookById(@PathVariable(name = "id")
-                                                    @Positive(message = "{id.positive}")
-                                                    @ApiParam(name = "id", value = "图书 ID", required = true, example = "1") Long bookId,
-                                                    @RequestBody
-                                                    @Validated BookDTO bookDTO) {
+    public UpdatedResponseVO<Object> updateBookById(
+            @ApiParam(name = "id", value = "图书 ID", required = true, example = "1")
+            @Positive(message = "{id.positive}")
+            @PathVariable(name = "id") Long bookId,
+            @Validated
+            @RequestBody BookDTO bookDTO) {
         this.bookService.updateBookById(bookId, bookDTO);
-        return new UpdatedResponseVO<>(BusinessCodeConstant.UPDATE_BOOK_SUCCESS);
+        return new UpdatedResponseVO<>(BookCodeConstant.UPDATE_BOOK_SUCCESS);
     }
 
     /**
@@ -102,11 +105,12 @@ public class BookController {
     @ScopeLevel
     @DeleteMapping("/{id}")
     @ApiOperation(value = "删除图书接口", notes = "根据图书 ID 删除相应图书", httpMethod = "DELETE")
-    public DeletedResponseVO<Object> deleteBookById(@PathVariable(name = "id")
-                                                    @Positive(message = "{id.positive}")
-                                                    @ApiParam(name = "id", value = "图书 ID", required = true, example = "1") Long bookId) {
+    public DeletedResponseVO<Object> deleteBookById(
+            @ApiParam(name = "id", value = "图书 ID", required = true, example = "1")
+            @Positive(message = "{id.positive}")
+            @PathVariable(name = "id") Long bookId) {
         this.bookService.deleteBookById(bookId);
-        return new DeletedResponseVO<>(BusinessCodeConstant.DELETE_BOOK_SUCCESS);
+        return new DeletedResponseVO<>(BookCodeConstant.DELETE_BOOK_SUCCESS);
     }
 
     /**
@@ -129,15 +133,16 @@ public class BookController {
      * @return 返回封装着获取的当前页的图书列表的分页视图对象
      */
     @ScopeLevel
-    @GetMapping("/latest")
+    @GetMapping("/page")
     @ApiOperation(value = "分页获取图书列表接口", notes = "获取当前页的图书列表", httpMethod = "GET")
-    public PagingVO<BookDO> getBookListByPage(@RequestParam(name = "page", required = false, defaultValue = "0")
-                                              @Min(value = 0, message = "{page.number.min}")
-                                              @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
-                                              @RequestParam(name = "count", required = false, defaultValue = "10")
-                                              @Min(value = 1, message = "{page.count.min}")
-                                              @Max(value = 30, message = "{page.count.max}")
-                                              @ApiParam(name = "count", value = "每页图书数", defaultValue = "10", example = "10") Integer count) {
+    public PagingVO<BookDO> getBookListByPage(
+            @Min(value = 0, message = "{page.number.min}")
+            @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0")
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @Min(value = 1, message = "{page.count.min}")
+            @Max(value = 30, message = "{page.count.max}")
+            @ApiParam(name = "count", value = "每页图书数", defaultValue = "10", example = "10")
+            @RequestParam(name = "count", required = false, defaultValue = "10") Integer count) {
         Page<BookDO> bookPage = this.bookService.getBookListByPage(page, count);
         return new PagingVO<>(bookPage);
     }
@@ -150,15 +155,16 @@ public class BookController {
      * @return 返回封装着获取的当前页的图书简要信息列表的分页视图对象
      */
     @ScopeLevel
-    @GetMapping("/simple/latest")
+    @GetMapping("/page/simple")
     @ApiOperation(value = "分页获取图书简要信息列表接口", notes = "获取当前页的图书简要信息列表", httpMethod = "GET")
-    public PagingDozerVO<BookDO, BookSampleVO> getSimpleBookListByPage(@RequestParam(name = "page", required = false, defaultValue = "0")
-                                                                       @Min(value = 0, message = "{page.number.min}")
-                                                                       @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0") Integer page,
-                                                                       @RequestParam(name = "count", required = false, defaultValue = "10")
-                                                                       @Min(value = 1, message = "{page.count.min}")
-                                                                       @Max(value = 30, message = "{page.count.max}")
-                                                                       @ApiParam(name = "count", value = "每页图书简要信息数", defaultValue = "10", example = "10") Integer count) {
+    public PagingDozerVO<BookDO, BookSampleVO> getSimpleBookListByPage(
+            @Min(value = 0, message = "{page.number.min}")
+            @ApiParam(name = "page", value = "当前页数", defaultValue = "0", example = "0")
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @Min(value = 1, message = "{page.count.min}")
+            @Max(value = 30, message = "{page.count.max}")
+            @ApiParam(name = "count", value = "每页图书简要信息数", defaultValue = "10", example = "10")
+            @RequestParam(name = "count", required = false, defaultValue = "10") Integer count) {
         Page<BookDO> bookPage = this.bookService.getBookListByPage(page, count);
         return new PagingDozerVO<>(bookPage, BookSampleVO.class);
     }

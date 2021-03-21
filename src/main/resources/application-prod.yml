@@ -28,3 +28,16 @@ staging:
   security: # 安全性配置
     jwt-key: fushengruomengstaging # 用于生成 JWT 令牌的 key
     token-expire-time: 7200        # 令牌过期时间
+
+# knife4j 配置
+knife4j:
+  open: false                                   # 是否开启 knife4j(通过条件注解的方式控制)
+  title: xxx 接口 API                           # API 页面标题
+  description: xxx 的 API 接口文档               # API 页面描述
+  version: 0.0.1                               # API 版本号
+  terms-of-service-url: https://www.xxx.com/   # API 服务条款地址
+  base-package: cn.xilikeli.staging.controller # API 接口包路径
+  # 作者(联系人)信息
+  name: 联系人名称                  # 名称
+  url: https://www.xxx.com/       # 个人站点地址
+  email: xxx@xxx.com              # 联系邮箱

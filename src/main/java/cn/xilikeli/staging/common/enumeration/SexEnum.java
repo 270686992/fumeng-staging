@@ -1,8 +1,13 @@
 package cn.xilikeli.staging.common.enumeration;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * <p>
- * 性别枚举类
+ * 性别枚举
  * </p>
  *
  * @author txxunmei
@@ -13,47 +18,68 @@ package cn.xilikeli.staging.common.enumeration;
 public enum SexEnum {
 
     /**
-     * 女
+     * 未定义
      */
-    FEMALE(0, "女"),
+    UNDEFINED(-1, "未定义"),
 
     /**
      * 男
      */
-    MALE(1, "男"),
+    MALE(0, "男"),
+
+    /**
+     * 女
+     */
+    FEMALE(1, "女"),
 
     /**
      * 保密
      */
     SECRECY(2, "保密");
 
-    /**
-     * 枚举值
-     */
-    private final Integer value;
+    private final Integer index;
 
-    /**
-     * 枚举描述
-     */
     private final String description;
 
-    /**
-     * 构造函数
-     *
-     * @param value       枚举值
-     * @param description 枚举描述
-     */
-    SexEnum(Integer value, String description) {
-        this.value = value;
+    SexEnum(Integer index, String description) {
+        this.index = index;
         this.description = description;
     }
 
-    public Integer getValue() {
-        return this.value;
+    public Integer getIndex() {
+        return this.index;
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    public static SexEnum toEnum(Integer index) {
+        return Stream.of(SexEnum.values())
+                .filter(sexEnum -> sexEnum.index.equals(index))
+                .findAny()
+                .orElse(UNDEFINED);
+    }
+
+    public static SexEnum toEnum(String description) {
+        return Stream.of(SexEnum.values())
+                .filter(sexEnum -> sexEnum.description.equals(description))
+                .findAny()
+                .orElse(UNDEFINED);
+    }
+
+    public static String getDescriptionByIndex(Integer index) {
+        return Stream.of(SexEnum.values())
+                .filter(sexEnum -> sexEnum.index.equals(index))
+                .map(SexEnum::getDescription)
+                .findAny()
+                .orElse("");
+    }
+
+    public static List<SexEnum> getAllEffectiveEnum() {
+        return Arrays.stream(SexEnum.values())
+                .filter(sexEnum -> sexEnum.index > UNDEFINED.index)
+                .collect(Collectors.toList());
     }
 
 }

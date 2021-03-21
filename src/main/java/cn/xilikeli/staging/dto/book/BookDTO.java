@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * <p>
- * 图书 DTO
+ * 图书信息 DTO
  * </p>
  *
  * @author txxunmei
@@ -26,7 +26,7 @@ import javax.validation.constraints.NotBlank;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "图书 DTO", description = "图书 DTO")
+@ApiModel(value = "图书信息 DTO", description = "图书信息 DTO")
 public class BookDTO {
 
     /**

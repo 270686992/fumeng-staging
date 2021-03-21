@@ -1,5 +1,10 @@
 package cn.xilikeli.staging.common.enumeration;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * <p>
  * 用户状态枚举类
@@ -13,6 +18,11 @@ package cn.xilikeli.staging.common.enumeration;
 public enum AccountStatusEnum {
 
     /**
+     * 未定义
+     */
+    UNDEFINED(-1, "未定义"),
+
+    /**
      * 冻结
      */
     BLOCK(0, "冻结"),
@@ -22,34 +32,49 @@ public enum AccountStatusEnum {
      */
     NORMAL(1, "正常");
 
+    private final Integer index;
 
-    /**
-     * 枚举值
-     */
-    private final Integer value;
-
-    /**
-     * 枚举描述
-     */
     private final String description;
 
-    /**
-     * 构造函数
-     *
-     * @param value       枚举值
-     * @param description 枚举描述
-     */
-    AccountStatusEnum(Integer value, String description) {
-        this.value = value;
+    AccountStatusEnum(Integer index, String description) {
+        this.index = index;
         this.description = description;
     }
 
-    public Integer getValue() {
-        return this.value;
+    public Integer getIndex() {
+        return this.index;
     }
 
     public String getDescription() {
         return this.description;
+    }
+
+    public static AccountStatusEnum toEnum(Integer index) {
+        return Stream.of(AccountStatusEnum.values())
+                .filter(accountStatusEnum -> accountStatusEnum.index.equals(index))
+                .findAny()
+                .orElse(UNDEFINED);
+    }
+
+    public static AccountStatusEnum toEnum(String description) {
+        return Stream.of(AccountStatusEnum.values())
+                .filter(accountStatusEnum -> accountStatusEnum.description.equals(description))
+                .findAny()
+                .orElse(UNDEFINED);
+    }
+
+    public static String getDescriptionByIndex(Integer index) {
+        return Stream.of(AccountStatusEnum.values())
+                .filter(accountStatusEnum -> accountStatusEnum.index.equals(index))
+                .map(AccountStatusEnum::getDescription)
+                .findAny()
+                .orElse("");
+    }
+
+    public static List<AccountStatusEnum> getAllEffectiveEnum() {
+        return Arrays.stream(AccountStatusEnum.values())
+                .filter(accountStatusEnum -> accountStatusEnum.index > UNDEFINED.index)
+                .collect(Collectors.toList());
     }
 
 }

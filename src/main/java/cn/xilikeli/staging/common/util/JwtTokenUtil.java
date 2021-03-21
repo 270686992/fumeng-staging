@@ -43,6 +43,8 @@ public class JwtTokenUtil {
 
     public static final String SCOPE_LEVEL_KEY = "scopeLevel";
 
+    public static final String IDENTITY_TYPE_KEY = "identityType";
+
     @Value("${staging.security.jwt-key}")
     public void setJwtKey(String jwtKey) {
         JwtTokenUtil.jwtKey = jwtKey;
@@ -54,24 +56,26 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 使用 accountId 和 scopeLevel 生成 JWT 令牌并返回
+     * 使用 accountId, scopeLevel 和 identityType 生成 JWT 令牌并返回
      *
-     * @param accountId  获取 JWT 令牌的用户的标识
-     * @param scopeLevel 获取 JWT 令牌的用户的分组级别
+     * @param accountId    获取 JWT 令牌的用户的标识
+     * @param scopeLevel   获取 JWT 令牌的用户的分组级别
+     * @param identityType 用户身份认证类型 {@link cn.xilikeli.staging.common.constant.IdentityTypeConstant}
      * @return 返回生成的 JWT 令牌
      */
-    public static String makeToken(Long accountId, Integer scopeLevel) {
-        return JwtTokenUtil.getToken(accountId, scopeLevel);
+    public static String makeToken(Long accountId, Integer scopeLevel, String identityType) {
+        return JwtTokenUtil.getToken(accountId, scopeLevel, identityType);
     }
 
     /**
-     * 使用 accountId 和用户默认分组级别生成 JWT 令牌并返回
+     * 使用 accountId 和 identityType 生成 JWT 令牌并返回
      *
-     * @param accountId 获取 JWT 令牌的用户的标识
+     * @param accountId    获取 JWT 令牌的用户的标识
+     * @param identityType 用户身份认证类型 {@link cn.xilikeli.staging.common.constant.IdentityTypeConstant}
      * @return 返回生成的 JWT 令牌
      */
-    public static String makeToken(Long accountId) {
-        return JwtTokenUtil.makeToken(accountId, JwtTokenUtil.DEFAULT_SCOPE);
+    public static String makeToken(Long accountId, String identityType) {
+        return JwtTokenUtil.makeToken(accountId, JwtTokenUtil.DEFAULT_SCOPE, identityType);
     }
 
     /**
@@ -120,13 +124,14 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 使用 accountId 和 scopeLevel 生成 JWT 令牌
+     * 使用 accountId, scopeLevel 和 identityType 生成 JWT 令牌
      *
-     * @param accountId  获取 JWT 令牌的用户的标识
-     * @param scopeLevel 获取 JWT 令牌的用户的分组级别
+     * @param accountId    获取 JWT 令牌的用户的标识
+     * @param scopeLevel   获取 JWT 令牌的用户的分组级别
+     * @param identityType 用户身份认证类型 {@link cn.xilikeli.staging.common.constant.IdentityTypeConstant}
      * @return 返回生成的 JWT 令牌
      */
-    private static String getToken(Long accountId, Integer scopeLevel) {
+    private static String getToken(Long accountId, Integer scopeLevel, String identityType) {
         // 生成令牌的算法
         Algorithm algorithm = Algorithm.HMAC256(JwtTokenUtil.jwtKey);
 
@@ -137,6 +142,7 @@ public class JwtTokenUtil {
         return JWT.create()
                 .withClaim(ACCOUNT_ID_KEY, accountId)
                 .withClaim(SCOPE_LEVEL_KEY, scopeLevel)
+                .withClaim(IDENTITY_TYPE_KEY, identityType)
                 .withIssuedAt(map.get("issueTime"))
                 .withExpiresAt(map.get("expiredTime"))
                 .sign(algorithm);

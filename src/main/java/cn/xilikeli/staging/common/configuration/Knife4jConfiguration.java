@@ -2,27 +2,22 @@ package cn.xilikeli.staging.common.configuration;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <p>
- * Knife4j 配置类
+ * Knife4j 配置
  * 本地访问地址: <a>http://localhost:端口号/doc.html</a>
  * </p>
  *
@@ -36,6 +31,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2WebMvc
 @ConfigurationProperties(prefix = "knife4j")
+@ConditionalOnProperty(value = "knife4j.open", havingValue = "true")
 public class Knife4jConfiguration {
 
     /**
@@ -91,31 +87,7 @@ public class Knife4jConfiguration {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
-                .build()
-                .globalOperationParameters(globalOperation());
-    }
-
-    /**
-     * 配置全局参数
-     *
-     * @return 返回配置的全局参数
-     */
-    private List<Parameter> globalOperation() {
-        List<Parameter> pars = new ArrayList<>();
-        ParameterBuilder tokenPar = new ParameterBuilder();
-
-        // 配置 token 参数, 非必传
-        tokenPar.name("Authorization")
-                .description("token")
-                .modelRef(new ModelRef("string"))
-                .parameterType("header")
-                .required(false)
-                .scalarExample("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjM0LCJzY29wZSI6OCwiZXhwIjoxNjc1MDU2NzcyLCJpYXQiOjE1ODg2NTY3NzJ9.FEAYgvHOOkk_x2l4od0bc5RitaXT4xaSUxaL65NT0-w")
                 .build();
-
-        pars.add(tokenPar.build());
-
-        return pars;
     }
 
     /**

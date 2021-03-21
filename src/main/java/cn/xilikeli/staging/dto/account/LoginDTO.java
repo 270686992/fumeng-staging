@@ -32,17 +32,16 @@ import javax.validation.constraints.NotNull;
 public class LoginDTO {
 
     /**
-     * 用户名
+     * 账号, 如: 用户名、微信小程序 openid 等等...
      */
-    @NotBlank(message = "{username.not-blank}")
-    @ApiModelProperty(value = "用户名", required = true, example = "guest")
-    private String username;
+    @NotBlank(message = "{account.not-blank}")
+    @ApiModelProperty(value = "账号, 如: 用户名、微信小程序 openid 等等...", required = true, example = "guest")
+    private String account;
 
     /**
      * 密码
      */
-    @NotBlank(message = "{password.new.not-blank}")
-    @ApiModelProperty(value = "密码", required = true, example = "123456")
+    @ApiModelProperty(value = "密码", example = "123456")
     private String password;
 
     /**
@@ -52,7 +51,7 @@ public class LoginDTO {
      */
     @NotNull(message = "{login-type.not-null}")
     @EnumValue(target = LoginTypeEnum.class, message = "{login-type.value}")
-    @ApiModelProperty(value = "登录类型", required = true, example = "0")
+    @ApiModelProperty(value = "登录类型: 0(用户名、密码登录), 1(微信小程序登录), 2(邮箱登录), 3(手机号登录)", required = true, example = "0")
     private Integer loginType;
 
 }
