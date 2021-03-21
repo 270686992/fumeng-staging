@@ -60,7 +60,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
             return unifyResponseVO;
         } else {
             // String 类型不能直接包装, 所以要进行些特别的处理
-            if (returnType.getGenericParameterType().equals(String.class)) {
+            if (returnType.getParameterType().equals(String.class)) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 try {
                     // 因为下面的转换为 Json 字符串响应回去的类型是 text 类型而不是 json 类型, 所以在此处设置一下
