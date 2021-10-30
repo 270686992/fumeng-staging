@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.common.response;
+package cn.xilikeli.staging.common.advice;
 
 import cn.xilikeli.staging.common.exception.http.FailedException;
 import cn.xilikeli.staging.common.util.ResponseUtil;

@@ -162,6 +162,12 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.76</version>
+        </dependency>
     </dependencies>
 
     <build>

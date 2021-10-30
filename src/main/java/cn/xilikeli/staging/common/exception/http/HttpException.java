@@ -87,8 +87,9 @@ public class HttpException extends RuntimeException {
         this.defaultMessageFlag = false;
     }
 
-    public Throwable doFillInStackTrace() {
-        return super.fillInStackTrace();
+    @Override
+    public synchronized Throwable fillInStackTrace() {
+        return this;
     }
 
 }

@@ -1,4 +1,4 @@
-package cn.xilikeli.staging.common.exception;
+package cn.xilikeli.staging.common.advice;
 
 import cn.xilikeli.staging.common.configuration.CodeMessageConfiguration;
 import cn.xilikeli.staging.common.enumeration.CodeEnum;
